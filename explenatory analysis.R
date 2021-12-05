@@ -83,9 +83,12 @@ p2 <- ggplot(car_dat3) + aes(x = log(price)) +
   theme_classic() +
   theme(line = element_line(size = 0.5)) 
 
-ggpubr::ggarrange(p1, p2, 
+p <- 
+  ggpubr::ggarrange(p1, p2, 
                   labels = c("A", "B"),
                   ncol = 1, nrow = 2)
+p
+ggsave('C:/Users/Hamid/Desktop/car_price_dist.jpeg', p, width = 7, height = 8)
 
 ## Box plots
 ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
@@ -124,7 +127,18 @@ ggplot(car_dat3) +
   scale_colour_brewer(palette = "Set1", name = "Cylinder Number")+
   theme_classic()
 
-##### Heart disease
+res <- car_dat3 %>% mutate(category=cut(wheelbase, breaks=4, labels=c("1","2","3", "4")))
+
+p <- 
+  ggplot(res) +
+  aes(x = category, y = price) +
+  geom_boxplot(color = "#3399ff") + stat_summary(fun=median, geom="line", aes(group=1), color = "#cc0099")  + 
+  stat_summary(fun=median, geom="point", color = "#cc0099")+ ggtitle('The square effect of wheel base on price')+
+  xlab('Wheel base groups') + ylab('Price')+
+  theme_classic()
+p
+ggsave('C:/Users/Hamid/Desktop/wheel base groups.jpeg', p, width = 4, height = 5)
+##### Heart disease ###### 
 heart_disease <- read_csv("C:/Users/Hamid/Desktop/heart.csv")
 
 heart_disease$HeartDisease <- factor(heart_disease$HeartDisease, levels = c(0, 1), labels = c('No', 'Yes'))
@@ -144,7 +158,8 @@ p_chest_pain <-
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
 
-ggplot(heart_disease, aes(x=Age, fill = HeartDisease))+ facet_grid(.~Sex)+
+p<- 
+  ggplot(heart_disease, aes(x=Age, fill = HeartDisease))+ facet_grid(.~Sex)+
   geom_bar() +
   xlab('Age') + ylab('Count')+
   scale_fill_manual(values=c("#3399ff", "#cc0099"), 
@@ -152,16 +167,20 @@ ggplot(heart_disease, aes(x=Age, fill = HeartDisease))+ facet_grid(.~Sex)+
   theme_classic() + 
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
+p
+ggsave('C:/Users/Hamid/Desktop/age_heart_sex.jpeg', p, width = 8, height = 5)
 
 ##Box plot cholestrol
-ggplot(heart_disease, aes(y = Cholesterol, x=HeartDisease))+
-  geom_boxplot() +
+p <- ggplot(heart_disease, aes(y = Cholesterol, x=HeartDisease))+
+  geom_boxplot(colour = "#cc0099") +
   xlab('Heart Disease') + ylab('Cholesterol')+
   scale_fill_manual(values=c("#3399ff", "#cc0099"), 
                     name = "Heart Disease")+
   theme_classic() + 
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
+p
+ggsave('C:/Users/Hamid/Desktop/cholestrol.jpeg', p, width = 4, height = 5)
 ### exercise
 df <- heart_disease %>% group_by(HeartDisease, ExerciseAngina, Sex) %>% count()
 ex_ang_plot <- 
@@ -174,13 +193,22 @@ ex_ang_plot <-
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
 
-ggpubr::ggarrange(p_chest_pain, ex_ang_plot, 
+p <-
+  ggpubr::ggarrange(p_chest_pain, ex_ang_plot, 
                   labels = c("A", "B"),
                   ncol = 1, nrow = 2)
 
+
+
+p
+ggsave('C:/Users/Hamid/Desktop/chest_pain_exercise_angina.jpeg', p, width = 8, height = 8)
 ## 
-ggplot(heart_disease, aes(y = Oldpeak, x=HeartDisease))+
+p <- 
+  ggplot(heart_disease, aes(y = Oldpeak, x=HeartDisease))+
   geom_boxplot(colour = "#cc0099") +
   xlab('Heart Disease') + ylab('Old peak')+
   theme_classic() + 
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+
+p
+ggsave('C:/Users/Hamid/Desktop/old_peak.jpeg', p, width = 5, height = 5)
