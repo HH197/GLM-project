@@ -1,27 +1,40 @@
 ---
-title: "GLM project report"
-author: "Archibald, Thet, and Hamid"
-date: "`r format(Sys.time(), '%Y-%m-%d')`"
+title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n|
+  \\ \\Huge Heart Disease Classification\n"
+author: |
+  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
+  | \small Authors are in alphabetic order and have equal contribution.
 output:
   pdf_document:
     extra_dependencies:
     - bbm
     - xcolor
-    toc: yes
-  html_document:
-    df_print: paged
-    toc: yes
-  html_notebook:
-    toc: yes
+  fontsize: 12
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+\centering
+\raggedright
+\newpage
+\tableofcontents
 
-# Car Price Prediction and Heart Disease Classfication
-
-## Car Price Prediction
+\pagebreak
 
 
-## Heart Disease Classfication
+#Abstract
+
+# Car
+## Introduction
+## Data Collection and exploration
+## Statistical Analysis
+## Conclusion
+
+#Heart
+
+## Introduction
+## Data Collection and exploration
+## Statistical Analysis
+## Conclusion
+
+# References
+# Appendix
+
