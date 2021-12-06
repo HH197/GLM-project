@@ -20,7 +20,7 @@ output:
 \pagebreak
 
 
-#Abstract
+# Abstract
 
 # Car
 ## Introduction
@@ -28,7 +28,7 @@ output:
 ## Statistical Analysis
 ## Conclusion
 
-#Heart
+# Heart
 
 ## Introduction
 ## Data Collection and exploration
