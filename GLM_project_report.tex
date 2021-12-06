@@ -1,0 +1,121 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{GLM project: Car Price Prediction and Heart Disease
+Classfication}
+\author{Archibald, Thet, and Hamid}
+\date{2021-12-06}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={GLM project: Car Price Prediction and Heart Disease Classfication},
+  pdfauthor={Archibald, Thet, and Hamid},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bbm}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\pagebreak
+
+\hypertarget{car-price-prediction}{%
+\section{Car Price Prediction}\label{car-price-prediction}}
+
+\hypertarget{heart-disease-classfication}{%
+\section{2 Heart Disease
+Classfication}\label{heart-disease-classfication}}
+
+\hypertarget{introduction-and-motivation}{%
+\subsection{2.1 Introduction and
+Motivation}\label{introduction-and-motivation}}
+
+\hypertarget{data-collection-and-covariates-intrepreter}{%
+\subsection{2.2 Data Collection and Covariates
+Intrepreter}\label{data-collection-and-covariates-intrepreter}}
+
+We found the data from Kaggle {[}2{]}, a data
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Age&age of the patient &years\\ 
+Sex&sex of the patient&M: Male, F: Female\\ 
+ChestPainType&chest pain type&TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic\\ 
+RestingBP&resting blood pressure &mm Hg\\ 
+Cholesterol&serum cholesterol&1: if FastingBS > 120 mg/dl, 0: otherwise\\ 
+FastingBS&fasting blood sugar&Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria\\ 
+RestingECG&resting electrocardiogram results&Numeric value between 60 and 202\\ 
+MaxHR&maximum heart rate achieved&Y: Yes, N: No\\ 
+ExerciseAngina& exercise-induced angina &Numeric value measured in depression\\ 
+Oldpeak&oldpeak = ST &Numeric value measured in depression\\ 
+ST_Slope&the slope of the peak exercise ST segment &Up: upsloping, Flat: flat, Down: downsloping\\ 
+HeartDisease&output class&1: heart disease, 0: Normal\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{data-exploration}{%
+\subsection{2.3 Data Exploration}\label{data-exploration}}
+
+\hypertarget{section}{%
+\section{3}\label{section}}
+
+\end{document}
