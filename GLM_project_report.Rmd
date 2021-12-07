@@ -42,8 +42,56 @@ output:
 # Heart
 
 ## Introduction
+
 ## Data Collection and exploration
+
 ## Statistical Analysis
+
+### 3 GLM models and stepwise AIC selection
+
+To begin with, let's assign each feature with a variable name.
+
+
+
+
+\begin{tabular}{ |p{2.3cm}|p{3cm}|p{9cm}|p{0.7cm}|  }
+ \hline
+ \multicolumn{4}{|c|}{Data Dictionary} \\
+ \hline
+ Variable Name & Definition & Explanation & Vari- able name\\
+ \hline
+    Age   &   age of the patient    &   years   &   $x_1$   \\ 
+   Sex   &   sex of the patient   &   M: Male, F: Female   &   $x_2$   \\ 
+   ChestPainType   &   chest pain type   &   TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic   &   $x_3$   \\ 
+   RestingBP   &   resting blood pressure    &   mm Hg   &   $x_4$   \\ 
+   Cholesterol   &   serum cholesterol   &   1: if FastingBS > 120 mg/dl, 0: otherwise   &   $x_5$   \\ 
+   FastingBS   &   fasting blood sugar   &   Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria   &   $x_6$   \\ 
+   RestingECG   &   resting electrocardiogram results   &   Numeric value between 60 and 202   &   $x_7$   \\ 
+   MaxHR   &   maximum heart rate achieved   &   Y: Yes, N: No   &   $x_8$   \\ 
+   ExerciseAngina   &    exercise-induced angina    &   Numeric value measured in depression   &   $x_9$   \\ 
+   Oldpeak   &   oldpeak = ST    &   Numeric value measured in depression   &   $x_{10}$   \\ 
+   ST\_Slope   &   the slope of the peak exercise ST segment    &   Up: upsloping, Flat: flat, Down: downsloping   &   $x_{11}$   \\ 
+   HeartDisease   &   output class   &   1: heart disease, 0: Normal   &   $y$   \\ 
+
+ \hline
+ \end{tabular}
+ 
+ Since the response is having heart disease or not, it is a binomial distributed response. So it is suggested we could use a logistic regression model.
+ At first, we created a logistic model of all the main effects, and the formula of the model is
+$$
+\log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
+$$
+where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
+So we fitted the model, and got the estimated shown in the table below.
+
+***********************a model
+
+
+ 
+### Analysis of the 3 Models
+
+1. ROC, Deviance Test, Pseudo-R square, 
+
 ## Conclusion
 
 # References
