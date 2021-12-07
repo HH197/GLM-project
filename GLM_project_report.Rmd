@@ -1,17 +1,21 @@
 ---
-title: "GLM project: Car Price Prediction and Heart Disease Classfication"
-author: "Archibald, Thet, and Hamid"
-date: "`r format(Sys.time(), '%Y-%m-%d')`"
+title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n|
+  \\ \\Huge Heart Disease Classification\n"
+author: |
+  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
+  | \small Authors are in alphabetic order and have equal contribution.
 output:
   pdf_document:
     extra_dependencies:
     - bbm
     - xcolor
+    toc: yes
   html_document:
     df_print: paged
     toc: yes
   html_notebook:
     toc: yes
+  fontsize: 12
 ---
 \pagebreak
 
@@ -19,45 +23,29 @@ output:
 
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-# Car Price Prediction
-
-    
-# 2 Heart Disease Classfication
-
-## 2.1 Introduction and Motivation
-
-## 2.2 Data Collection and Covariates Intrepreter
-
-We found the data from Kaggle [2], a data  
-
-
-\begin{table}
 \centering
-\begin{tabular}{|l|l|l|}
-\hline
-Age&age of the patient &years\\ 
-Sex&sex of the patient&M: Male, F: Female\\ 
-ChestPainType&chest pain type&TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic\\ 
-RestingBP&resting blood pressure &mm Hg\\ 
-Cholesterol&serum cholesterol&1: if FastingBS > 120 mg/dl, 0: otherwise\\ 
-FastingBS&fasting blood sugar&Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria\\ 
-RestingECG&resting electrocardiogram results&Numeric value between 60 and 202\\ 
-MaxHR&maximum heart rate achieved&Y: Yes, N: No\\ 
-ExerciseAngina& exercise-induced angina &Numeric value measured in depression\\ 
-Oldpeak&oldpeak = ST &Numeric value measured in depression\\ 
-ST_Slope&the slope of the peak exercise ST segment &Up: upsloping, Flat: flat, Down: downsloping\\ 
-HeartDisease&output class&1: heart disease, 0: Normal\\ 
-\hline
-\end{tabular}
-\end{table}
+\raggedright
+\newpage
+\tableofcontents
 
 
-## 2.3 Data Exploration 
 
-# 3 
+
+# Abstract
+
+# Car
+## Introduction
+## Data Collection and exploration
+## Statistical Analysis
+## Conclusion
+
+# Heart
+
+## Introduction
+## Data Collection and exploration
+## Statistical Analysis
+## Conclusion
+
+# References
+# Appendix
 
