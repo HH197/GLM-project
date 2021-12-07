@@ -220,19 +220,16 @@ Authors are in alphabetic order and have equal contribution.</div></h4>
 <div id="TOC">
 <ul>
 <li><a href="#abstract">Abstract</a></li>
-<li><a href="#car">Car</a>
+<li><a href="#heart-disease-classification">Heart Disease Classification</a>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#data-collection-and-exploration">Data Collection and exploration</a></li>
-<li><a href="#statistical-analysis">Statistical Analysis</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
-</ul></li>
-<li><a href="#heart">Heart</a>
+<li><a href="#statistical-analysis">Statistical Analysis</a>
 <ul>
-<li><a href="#introduction-1">Introduction</a></li>
-<li><a href="#data-collection-and-exploration-1">Data Collection and exploration</a></li>
-<li><a href="#statistical-analysis-1">Statistical Analysis</a></li>
-<li><a href="#conclusion-1">Conclusion</a></li>
+<li><a href="#glm-models-and-stepwise-aic-selection">3 GLM models and stepwise AIC selection</a></li>
+<li><a href="#analysis-of-the-3-models">Analysis of the 3 Models</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 <li><a href="#appendix">Appendix</a></li>
@@ -243,9 +240,10 @@ Authors are in alphabetic order and have equal contribution.</div></h4>
 <div style="page-break-after: always;"></div>
 <div id="abstract" class="section level1">
 <h1>Abstract</h1>
+<p>Hi # Car Price Prediction ## Introduction ## Data Collection and exploration ## Statistical Analysis ## Conclusion</p>
 </div>
-<div id="car" class="section level1">
-<h1>Car</h1>
+<div id="heart-disease-classification" class="section level1">
+<h1>Heart Disease Classification</h1>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 </div>
@@ -254,23 +252,22 @@ Authors are in alphabetic order and have equal contribution.</div></h4>
 </div>
 <div id="statistical-analysis" class="section level2">
 <h2>Statistical Analysis</h2>
+<div id="glm-models-and-stepwise-aic-selection" class="section level3">
+<h3>3 GLM models and stepwise AIC selection</h3>
+<p>To begin with, let’s assign each feature with a variable name.</p>
+<p>Since the response is having heart disease or not, it is a binomial distributed response. So it is suggested we could use a logistic regression model. At first, we created a logistic model of all the main effects, and the formula of the model is <span class="math display">\[
+\log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
+\]</span> where <span class="math inline">\(p\)</span> is the probability to get the heart disease, and <span class="math inline">\(\beta_i, i = 1,2, \dots, 11\)</span> is the coefficients of the parameter, <span class="math inline">\(\beta_0\)</span> is the intercept. So we fitted the model, and got the estimated shown in the table below.</p>
+<p>***********************a model</p>
+</div>
+<div id="analysis-of-the-3-models" class="section level3">
+<h3>Analysis of the 3 Models</h3>
+<ol style="list-style-type: decimal">
+<li>ROC, Deviance Test, Pseudo-R square,</li>
+</ol>
+</div>
 </div>
 <div id="conclusion" class="section level2">
-<h2>Conclusion</h2>
-</div>
-</div>
-<div id="heart" class="section level1">
-<h1>Heart</h1>
-<div id="introduction-1" class="section level2">
-<h2>Introduction</h2>
-</div>
-<div id="data-collection-and-exploration-1" class="section level2">
-<h2>Data Collection and exploration</h2>
-</div>
-<div id="statistical-analysis-1" class="section level2">
-<h2>Statistical Analysis</h2>
-</div>
-<div id="conclusion-1" class="section level2">
 <h2>Conclusion</h2>
 </div>
 </div>
@@ -282,7 +279,7 @@ Authors are in alphabetic order and have equal contribution.</div></h4>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogInwgXFx2c3BhY2V7NWNtfSBcXEh1Z2UgQ2FyIFByaWNlIFByZWRpY3Rpb24gXG5cbnwgYW5kIFxuXG58DQogIFxcIFxcSHVnZSBIZWFydCBEaXNlYXNlIENsYXNzaWZpY2F0aW9uXG4iDQphdXRob3I6IHwNCiAgfCBcdnNwYWNlezAuNWNtfSBcTEFSR0UgSGFtaWQgSGFtaWRpLCBUaGV0IE55ZWluLCBhbmQgWWFuemhhbyBRaWFuDQogIHwgXHNtYWxsIEF1dGhvcnMgYXJlIGluIGFscGhhYmV0aWMgb3JkZXIgYW5kIGhhdmUgZXF1YWwgY29udHJpYnV0aW9uLg0Kb3V0cHV0Og0KICBwZGZfZG9jdW1lbnQ6DQogICAgZXh0cmFfZGVwZW5kZW5jaWVzOg0KICAgIC0gYmJtDQogICAgLSB4Y29sb3INCiAgICB0b2M6IHllcw0KICBodG1sX2RvY3VtZW50Og0KICAgIGRmX3ByaW50OiBwYWdlZA0KICAgIHRvYzogeWVzDQogIGh0bWxfbm90ZWJvb2s6DQogICAgdG9jOiB5ZXMNCiAgZm9udHNpemU6IDEyDQotLS0NClxwYWdlYnJlYWsNCg0KDQoNCg0KDQpcY2VudGVyaW5nDQpccmFnZ2VkcmlnaHQNClxuZXdwYWdlDQpcdGFibGVvZmNvbnRlbnRzDQoNCg0KDQoNCiMgQWJzdHJhY3QNCg0KIyBDYXINCiMjIEludHJvZHVjdGlvbg0KIyMgRGF0YSBDb2xsZWN0aW9uIGFuZCBleHBsb3JhdGlvbg0KIyMgU3RhdGlzdGljYWwgQW5hbHlzaXMNCiMjIENvbmNsdXNpb24NCg0KIyBIZWFydA0KDQojIyBJbnRyb2R1Y3Rpb24NCiMjIERhdGEgQ29sbGVjdGlvbiBhbmQgZXhwbG9yYXRpb24NCiMjIFN0YXRpc3RpY2FsIEFuYWx5c2lzDQojIyBDb25jbHVzaW9uDQoNCiMgUmVmZXJlbmNlcw0KIyBBcHBlbmRpeA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogInwgXFx2c3BhY2V7NWNtfSBcXEh1Z2UgQ2FyIFByaWNlIFByZWRpY3Rpb24gXG5cbnwgYW5kIFxuXG58DQogIFxcIFxcSHVnZSBIZWFydCBEaXNlYXNlIENsYXNzaWZpY2F0aW9uXG4iDQphdXRob3I6IHwNCiAgfCBcdnNwYWNlezAuNWNtfSBcTEFSR0UgSGFtaWQgSGFtaWRpLCBUaGV0IE55ZWluLCBhbmQgWWFuemhhbyBRaWFuDQogIHwgXHNtYWxsIEF1dGhvcnMgYXJlIGluIGFscGhhYmV0aWMgb3JkZXIgYW5kIGhhdmUgZXF1YWwgY29udHJpYnV0aW9uLg0Kb3V0cHV0Og0KICBwZGZfZG9jdW1lbnQ6DQogICAgZXh0cmFfZGVwZW5kZW5jaWVzOg0KICAgIC0gYmJtDQogICAgLSB4Y29sb3INCiAgICB0b2M6IHllcw0KICBodG1sX2RvY3VtZW50Og0KICAgIGRmX3ByaW50OiBwYWdlZA0KICAgIHRvYzogeWVzDQogIGh0bWxfbm90ZWJvb2s6DQogICAgdG9jOiB5ZXMNCiAgZm9udHNpemU6IDEyDQotLS0NClxwYWdlYnJlYWsNCg0KDQoNCg0KDQpcY2VudGVyaW5nDQpccmFnZ2VkcmlnaHQNClxuZXdwYWdlDQpcdGFibGVvZmNvbnRlbnRzDQoNCg0KDQoNCiMgQWJzdHJhY3QNCkhpDQojIENhciBQcmljZSBQcmVkaWN0aW9uDQojIyBJbnRyb2R1Y3Rpb24NCiMjIERhdGEgQ29sbGVjdGlvbiBhbmQgZXhwbG9yYXRpb24NCiMjIFN0YXRpc3RpY2FsIEFuYWx5c2lzDQojIyBDb25jbHVzaW9uDQoNCiMgSGVhcnQgRGlzZWFzZSBDbGFzc2lmaWNhdGlvbg0KDQojIyBJbnRyb2R1Y3Rpb24NCg0KIyMgRGF0YSBDb2xsZWN0aW9uIGFuZCBleHBsb3JhdGlvbg0KDQojIyBTdGF0aXN0aWNhbCBBbmFseXNpcw0KDQojIyMgMyBHTE0gbW9kZWxzIGFuZCBzdGVwd2lzZSBBSUMgc2VsZWN0aW9uDQoNClRvIGJlZ2luIHdpdGgsIGxldCdzIGFzc2lnbiBlYWNoIGZlYXR1cmUgd2l0aCBhIHZhcmlhYmxlIG5hbWUuDQoNCg0KDQoNClxiZWdpbnt0YWJ1bGFyfXsgfHB7Mi4zY219fHB7M2NtfXxwezljbX18cHswLjdjbX18ICB9DQogXGhsaW5lDQogXG11bHRpY29sdW1uezR9e3xjfH17RGF0YSBEaWN0aW9uYXJ5fSBcXA0KIFxobGluZQ0KIFZhcmlhYmxlIE5hbWUgJiBEZWZpbml0aW9uICYgRXhwbGFuYXRpb24gJiBWYXJpLSBhYmxlIG5hbWVcXA0KIFxobGluZQ0KICAgIEFnZSAgICYgICBhZ2Ugb2YgdGhlIHBhdGllbnQgICAgJiAgIHllYXJzICAgJiAgICR4XzEkICAgXFwgDQogICBTZXggICAmICAgc2V4IG9mIHRoZSBwYXRpZW50ICAgJiAgIE06IE1hbGUsIEY6IEZlbWFsZSAgICYgICAkeF8yJCAgIFxcIA0KICAgQ2hlc3RQYWluVHlwZSAgICYgICBjaGVzdCBwYWluIHR5cGUgICAmICAgVEE6IFR5cGljYWwgQW5naW5hLCBBVEE6IEF0eXBpY2FsIEFuZ2luYSwgTkFQOiBOb24tQW5naW5hbCBQYWluLCBBU1k6IEFzeW1wdG9tYXRpYyAgICYgICAkeF8zJCAgIFxcIA0KICAgUmVzdGluZ0JQICAgJiAgIHJlc3RpbmcgYmxvb2QgcHJlc3N1cmUgICAgJiAgIG1tIEhnICAgJiAgICR4XzQkICAgXFwgDQogICBDaG9sZXN0ZXJvbCAgICYgICBzZXJ1bSBjaG9sZXN0ZXJvbCAgICYgICAxOiBpZiBGYXN0aW5nQlMgPiAxMjAgbWcvZGwsIDA6IG90aGVyd2lzZSAgICYgICAkeF81JCAgIFxcIA0KICAgRmFzdGluZ0JTICAgJiAgIGZhc3RpbmcgYmxvb2Qgc3VnYXIgICAmICAgTm9ybWFsOiBOb3JtYWwsIFNUOiBoYXZpbmcgU1QtVCB3YXZlIGFibm9ybWFsaXR5IChUIHdhdmUgaW52ZXJzaW9ucyBhbmQvb3IgU1QgZWxldmF0aW9uIG9yIGRlcHJlc3Npb24gb2YgPiAwLjA1IG1WKSwgTFZIOiBzaG93aW5nIHByb2JhYmxlIG9yIGRlZmluaXRlIGxlZnQgdmVudHJpY3VsYXIgaHlwZXJ0cm9waHkgYnkgRXN0ZXMnIGNyaXRlcmlhICAgJiAgICR4XzYkICAgXFwgDQogICBSZXN0aW5nRUNHICAgJiAgIHJlc3RpbmcgZWxlY3Ryb2NhcmRpb2dyYW0gcmVzdWx0cyAgICYgICBOdW1lcmljIHZhbHVlIGJldHdlZW4gNjAgYW5kIDIwMiAgICYgICAkeF83JCAgIFxcIA0KICAgTWF4SFIgICAmICAgbWF4aW11bSBoZWFydCByYXRlIGFjaGlldmVkICAgJiAgIFk6IFllcywgTjogTm8gICAmICAgJHhfOCQgICBcXCANCiAgIEV4ZXJjaXNlQW5naW5hICAgJiAgICBleGVyY2lzZS1pbmR1Y2VkIGFuZ2luYSAgICAmICAgTnVtZXJpYyB2YWx1ZSBtZWFzdXJlZCBpbiBkZXByZXNzaW9uICAgJiAgICR4XzkkICAgXFwgDQogICBPbGRwZWFrICAgJiAgIG9sZHBlYWsgPSBTVCAgICAmICAgTnVtZXJpYyB2YWx1ZSBtZWFzdXJlZCBpbiBkZXByZXNzaW9uICAgJiAgICR4X3sxMH0kICAgXFwgDQogICBTVFxfU2xvcGUgICAmICAgdGhlIHNsb3BlIG9mIHRoZSBwZWFrIGV4ZXJjaXNlIFNUIHNlZ21lbnQgICAgJiAgIFVwOiB1cHNsb3BpbmcsIEZsYXQ6IGZsYXQsIERvd246IGRvd25zbG9waW5nICAgJiAgICR4X3sxMX0kICAgXFwgDQogICBIZWFydERpc2Vhc2UgICAmICAgb3V0cHV0IGNsYXNzICAgJiAgIDE6IGhlYXJ0IGRpc2Vhc2UsIDA6IE5vcm1hbCAgICYgICAkeSQgICBcXCANCg0KIFxobGluZQ0KIFxlbmR7dGFidWxhcn0NCiANCiBTaW5jZSB0aGUgcmVzcG9uc2UgaXMgaGF2aW5nIGhlYXJ0IGRpc2Vhc2Ugb3Igbm90LCBpdCBpcyBhIGJpbm9taWFsIGRpc3RyaWJ1dGVkIHJlc3BvbnNlLiBTbyBpdCBpcyBzdWdnZXN0ZWQgd2UgY291bGQgdXNlIGEgbG9naXN0aWMgcmVncmVzc2lvbiBtb2RlbC4NCiBBdCBmaXJzdCwgd2UgY3JlYXRlZCBhIGxvZ2lzdGljIG1vZGVsIG9mIGFsbCB0aGUgbWFpbiBlZmZlY3RzLCBhbmQgdGhlIGZvcm11bGEgb2YgdGhlIG1vZGVsIGlzDQokJA0KXGxvZyBcZnJhY3twfXsxLXB9ID0gXGJldGFfMCArIFxzdW1fe2k9MX1eezExfSBcYmV0YV9pIHhfaQ0KJCQNCndoZXJlICRwJCBpcyB0aGUgcHJvYmFiaWxpdHkgdG8gZ2V0IHRoZSBoZWFydCBkaXNlYXNlLCBhbmQgJFxiZXRhX2ksIGkgPSAxLDIsIFxkb3RzLCAxMSQgaXMgdGhlIGNvZWZmaWNpZW50cyBvZiB0aGUgcGFyYW1ldGVyLCAkXGJldGFfMCQgaXMgdGhlIGludGVyY2VwdC4gDQpTbyB3ZSBmaXR0ZWQgdGhlIG1vZGVsLCBhbmQgZ290IHRoZSBlc3RpbWF0ZWQgc2hvd24gaW4gdGhlIHRhYmxlIGJlbG93Lg0KDQoqKioqKioqKioqKioqKioqKioqKioqKmEgbW9kZWwNCg0KDQogDQojIyMgQW5hbHlzaXMgb2YgdGhlIDMgTW9kZWxzDQoNCjEuIFJPQywgRGV2aWFuY2UgVGVzdCwgUHNldWRvLVIgc3F1YXJlLCANCg0KIyMgQ29uY2x1c2lvbg0KDQojIFJlZmVyZW5jZXMNCiMgQXBwZW5kaXgNCg0K</div>
 
 
 
