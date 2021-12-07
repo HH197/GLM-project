@@ -33,13 +33,13 @@ output:
 
 # Abstract
 
-# Car
+# Car Price Prediction
 ## Introduction
 ## Data Collection and exploration
 ## Statistical Analysis
 ## Conclusion
 
-# Heart
+# Heart Disease Classification
 
 ## Introduction
 
