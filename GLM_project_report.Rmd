@@ -18,8 +18,7 @@ output:
   fontsize: 12
 ---
 \pagebreak
-
-
+\pagebreak
 
 
 
@@ -32,7 +31,6 @@ output:
 
 
 # Abstract
-Hi
 # Car Price Prediction
 ## Introduction
 ## Data Collection and exploration
@@ -82,10 +80,80 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
 $$
 where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
-So we fitted the model, and got the estimated shown in the table below.
+So we fitted the model, and got the estimated parameters shown in the table below.
 
-***********************a model
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+ \hline
+ & Estimate & Pr(>|z|) & significance\\ 
+ \hline
+(Intercept) & -1.16 & 0.411 & not significant\\ 
+Age & 0.0166 & 0.21 & not significant\\ 
+SexM & 1.47 & 1.6e-07 & ***\\ 
+ChestPainTypeATA & -1.83 & 2.03e-08 & ***\\ 
+ChestPainTypeNAP & -1.69 & 2.34e-10 & ***\\ 
+ChestPainTypeTA & -1.49 & 0.00058 & *\\ 
+RestingBP & 0.00419 & 0.485 & not significant\\ 
+Cholesterol & -0.00411 & 0.000154 & *\\ 
+FastingBS & 1.14 & 3.59e-05 & **\\ 
+RestingECGNormal & -0.177 & 0.515 & not significant\\ 
+RestingECGST & -0.269 & 0.443 & not significant\\ 
+MaxHR & -0.00429 & 0.393 & not significant\\ 
+ExerciseAnginaY & 0.9 & 0.000231 & *\\ 
+Oldpeak & 0.381 & 0.00131 & .\\ 
+ST\_SlopeFlat & 1.45 & 0.000703 & *\\ 
+ST\_SlopeUp & -0.994 & 0.0272 & .\\
+ \hline
+ \end{tabular} 
+\end{center}
+As we can see from the table, there are some variables that are not significant. We should drop some variables to make the model simpler. We choose backward step selection to do so. 
+And we get our estimated paraeters shown in the table below.
 
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+ \hline
+ & Estimate & Pr(>|z|) & significance\\ 
+ \hline
+(Intercept) & -1.72 & 0.0436 & .\\ 
+Age & 0.0231 & 0.0518 & not significant\\ 
+SexM & 1.47 & 1.36e-07 & ***\\ 
+ChestPainTypeATA & -1.86 & 8.89e-09 & ***\\ 
+ChestPainTypeNAP & -1.72 & 6.13e-11 & ***\\ 
+ChestPainTypeTA & -1.49 & 0.000494 & *\\ 
+Cholesterol & -0.00398 & 0.000106 & *\\ 
+FastingBS & 1.13 & 3.41e-05 & **\\ 
+ExerciseAnginaY & 0.936 & 8.21e-05 & **\\ 
+Oldpeak & 0.377 & 0.00121 & .\\ 
+ST\_SlopeFlat & 1.46 & 0.000654 & *\\ 
+ST\_SlopeUp & -1.03 & 0.0211 & .\\
+ \hline
+ \end{tabular} 
+\end{center}
+ 
+From the table, we can see all the variables are significant now.  here is the **model 1** formula.
+
+$$
+\begin{aligned}
+\log \frac{\hat p}{1-\hat p}& = -1.7  + 0.023 \text{Age} + 1.5 \text{SexM} - 1.9 \text{ChestPainTypeATA}\\ 
+&- 1.7 \text{ChestPainTypeNAP} - 1.5\text{ChestPainTypeTA} - 0.0040 \text{Cholesterol}\\
+&- 1.1 \text{FastingBS }+0.94 \text{ExerciseAnginaY }+ 0.38 \text{Oldpeak}\\
+& + 1.5 \text{ST\_slopeFlat} - 1.0 \text{ST\_slopeUp}\\
+\end{aligned}
+$$
+
+
+We need to test if the selected model is good enough to represent the origin mode. We did log-likelihood ratio test for the step-wise selected variables to see if the drop out is good. 
+The null hypothesis is 
+
+$$
+H_0: \beta_\text{RestingBP} = \beta_\text{RestingECG} = \beta_\text{MaxHR} =0 \text{  v.s } H_1: \text{At least one of these parameters not 0}
+$$
+
+We using the formula to get LLR statistic as
+$$
+LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-297.0925 +297.9042) =0.804
+$$
+with degrees of freedom of 4. So we can calculate the p-value is 0.8046016, which is very high. So we cannot reject $H_0$. So we can accept the reduced model.
 
  
 ### Analysis of the 3 Models
