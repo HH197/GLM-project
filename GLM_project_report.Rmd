@@ -24,7 +24,7 @@ csl: citation_style.csl
 
 # Abstract
 
-Generalized Linear Models (GLMs) are the extension of the ordinary linear regression models. GLMs enable us to use different distributions for the response with distinctive link functions @GLMintroduction. Here, we use two different data sets to show the broad applications of the GLMs in real-world problems, one of which is the "Car Price Prediction" @carprice, and the other is "Heart Failure prediction" @heartdata. In our analyses, we focus on model fitting and highlighting the most important variables instead of predicting desired outcomes and their accuracy. Our study of each data set is reported in its corresponding section. In the following, we discuss why we have chosen these data sets and provide a detailed description of our analyses along with the reasons and intuitions behind them.
+Generalized Linear Models (GLMs) are the extension of the ordinary linear regression models. GLMs enable us to use different distributions for the response with distinctive link functions @GLMintroduction. Here, we use two different data sets to show the broad applications of the GLMs in real-world problems, one of which is the "Car Price Prediction" @carprice, and the other is "Heart Failure prediction" @heartdata. In our analyses, we focus on model fitting and highlighting the most important variables instead of predicting desired outcomes and their accuracy. Our study of each data set is reported in its corresponding section. In the following, we discuss why we have chosen these data sets and provide a detailed description of our analyses along with the reasons and intuitions behind them. In both of these studies, all analyses were performed using the R programming language @R-base.
 
 \pagebreak
 
@@ -34,12 +34,20 @@ Generalized Linear Models (GLMs) are the extension of the ordinary linear regres
 
 ## Introduction
 
-One of the largest automotive markets in the world is the USA car market @carmarketUSA. Since 1982, when Honda invested in the USA car market, many other companies has been joining and competing in the USA car market resulting in foreign investment of more than 110 billion dollars @carmarketUSA. These days, with skilled workers, local and governmental supports, huge consumer market, and many other reasons, the USA car market is a primer market in the car industry. A new Chinese company want to join this marker. Here, our goal is to identify key variables impacting the car price, and their amount of impact. According to our findings, they can manipulate many variables, such as the car design, to have a better business strategy to enter the USA car market. 
+One of the largest automotive markets in the world is the USA car market @carmarketUSA. Since 1982, when Honda invested in the USA car market, many other companies have been joining and competing in the USA car market resulting in foreign investment of more than 110 billion dollars @carmarketUSA. These days, with skilled workers, local and governmental supports, a huge consumer market, and many other reasons, the USA car market is a primer market in the car industry. A new Chinese car company wants to join and compete in the USA car market. In the following, our goal is to identify significant variables affecting the car price and quantify their significance. These analyses are usually performed by a third party, such as a consulting company, or the business strategy division of the investing company. According to our findings, they can manipulate many variables, such as the car design, to have a better business strategy to enter the USA car market. These analyses can directly affect the success of billions of dollars investment. Consequently, our analyses are vital and should be detailed and valid.
+
+We found out the car price (response) distribution is quite close to the Gamma distribution; therefore, we used the GLM with Gamma distribution and logarithmic link function to model the price of cars for distinctive variables. We also suspected that it might be possible to model the logarithm of price with Gaussian distribution and identity link function. However, the distribution of the logarithmic price is not close to the Normal distribution. Consequently, we only used the Gamma distribution with the logarithmic link function. We performed variable selection and selected the most reasonable model (details in the Statistical Analyses section). 
+
+Using these analyses, we were able to identify several significant variables contributing to the car price, such as the car manufacturer (or the so-called brand of the car), the engine location (cars with rear engines are usually sport cars with higher prices), and the engine size (the bigger the higher the price).
+
+Our data set, and consequently, our analyses have some limitations as well. For instance, electric cars are more than 2.5% of the USA car market @electricmarket but are not included in our data set. Additionally, luxury brands such as Rolls-Royce and Lincoln are missing. Furthermore, the majority of sport cars are missing in our data set, showing our limitation in analyzing the sport and luxury car price variables. In the following, we present a detailed description of our analysis, methods, and results. 
+
+
 
 
 ## Data Collection and exploration
 
-## Statistical Analysis
+## Statistical Analyses
 
 ## Conclusion
 
@@ -49,12 +57,17 @@ One of the largest automotive markets in the world is the USA car market @carmar
 
 ## Introduction
 
-In our second data set, "Heart Failure prediction" @heartdata, we are trying to find the significant variables with prognostic value in 
-patients with heart failure. 
+Heart Failure, also know as cognitive heart failure, can broadly be defined as a condition that happens when heart is unable to supply body's need for Oxygen and blood @HeartFailure. According to the latest annual statistical report from the American Heart Association and the National Institutes of Health, about 6.2 million adults in the United States have heart failure @virani2020heart. Furthermore, in 2018, heart failure was mentioned on 379,800 death certificates (13.4%) @virani2020heart and cost about $30 billion annually @benjamin2019heart. 
+
+This suggests that identifying the core health behaviors and risk factors influencing the heart failure is critical not only for our community health but also for our economy. Therefore, we decided to analyze the "Heart Failure prediction" data set @heartdata to find variables playing a key role in heart failure. As the response in our data set is binary (0 or 1), we used the logistic regression to model the probability of having a heart failure. Moreover, we performed variable selection to select the best model and determine most important factors in heart failure (details in the Statistical Analyses section).
+
+This study has generally revealed causal factors in heart failure such as sex, exercise angina (a type of chest pain during performing exercises), distinctive types of chest pain, and squared of Cholesterol level. 
+
+The generalisability of our results is subject to certain limitations. For instance, our data set does not cover ages younger than 28 which will cause the analyses be biased toward older ages. Another issue that was not addressed in this study was the mortality of the patients. This might not seem arguable at the first look. However, most of the patients with asymptomatic chest pain might have lived without any critical problems through their lives and patients with other types of chest pain might have faced devastating situations. This might cause our findings to be questionable from different perspectives. 
 
 ## Data Collection and exploration
 
-## Statistical Analysis
+## Statistical Analyses
 
 ### 3 GLM models and stepwise AIC selection
 
