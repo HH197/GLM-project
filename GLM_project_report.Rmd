@@ -1,6 +1,6 @@
 ---
-title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n|
-  \\ \\Huge Heart Disease Classification\n"
+title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n| \\ \\Huge Heart
+  Disease Classification\n"
 author: |
   | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
   | \small Authors are in alphabetic order and have equal contribution.
@@ -9,39 +9,48 @@ output:
     extra_dependencies:
     - bbm
     - xcolor
-    toc: yes
-  html_document:
-    df_print: paged
-    toc: yes
-  html_notebook:
-    toc: yes
-  fontsize: 12
+fontsize: 12
+bibliography: references.bib
+csl: citation_style.csl
 ---
 \pagebreak
 
 
-
-
-
-\centering
-\raggedright
 \newpage
 \tableofcontents
 
 
-
+\pagebreak
 
 # Abstract
-Hi
+
+Generalized Linear Models (GLMs) are the extension of the ordinary linear regression models. GLMs enable us to use different distributions for the response with distinctive link functions @GLMintroduction. Here, we use two different data sets to show the broad applications of the GLMs in real-world problems, one of which is the "Car Price Prediction" @carprice, and the other is "Heart Failure prediction" @heartdata. In our analyses, we focus on model fitting and highlighting the most important variables instead of predicting desired outcomes and their accuracy. Our study of each data set is reported in its corresponding section. In the following, we discuss why we have chosen these data sets and provide a detailed description of our analyses along with the reasons and intuitions behind them.
+
+\pagebreak
+
+
+
 # Car Price Prediction
+
 ## Introduction
+
+One of the largest automotive markets in the world is the USA car market @carmarketUSA. Since 1982, when Honda invested in the USA car market, many other companies has been joining and competing in the USA car market resulting in foreign investment of more than 110 billion dollars @carmarketUSA. These days, with skilled workers, local and governmental supports, huge consumer market, and many other reasons, the USA car market is a primer market in the car industry. A new Chinese company want to join this marker. Here, our goal is to identify key variables impacting the car price, and their amount of impact. According to our findings, they can manipulate many variables, such as the car design, to have a better business strategy to enter the USA car market. 
+
+
 ## Data Collection and exploration
+
 ## Statistical Analysis
+
 ## Conclusion
+
+\pagebreak
 
 # Heart Disease Classification
 
 ## Introduction
+
+In our second data set, "Heart Failure prediction" @heartdata, we are trying to find the significant variables with prognostic value in 
+patients with heart failure. 
 
 ## Data Collection and exploration
 
@@ -94,6 +103,7 @@ So we fitted the model, and got the estimated shown in the table below.
 
 ## Conclusion
 
-# References
+
 # Appendix
 
+# References
