@@ -10,8 +10,8 @@
 .Rproj.user
 
 # output files
-.pdf
-.html
-.tex
-.toc
-.log
+*.pdf
+*.html
+*.tex
+*.toc
+*.log
