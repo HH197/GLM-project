@@ -88,17 +88,20 @@ p <-
                   labels = c("A", "B"),
                   ncol = 1, nrow = 2)
 p
-ggsave('C:/Users/Hamid/Desktop/car_price_dist.jpeg', p, width = 7, height = 8)
+ggsave('C:/Users/Hamid/Desktop/car_price_dist.pdf', p, width = 7, height = 8)
 
 ## Box plots
-ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
-  geom_boxplot() + 
+p <- 
+  ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
+  geom_boxplot(lwd=0.25) + 
   xlab('Company') + ylab('Price')+
   scale_fill_manual(values=c("#cc0099", "#3399ff"), 
                     name = "Fuel Type", 
                     labels = c("Diesel", "Gas"))+
   theme_classic() + 
   theme(axis.text.x = element_text(angle = 45,vjust = 0.5))
+
+ggsave('C:/Users/Hamid/Desktop/car_company.pdf', p, width = 8, height = 5)
 
 
 library("dplyr")

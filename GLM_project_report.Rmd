@@ -4,15 +4,19 @@ title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n| \\ \\Huge He
 author: |
   | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
   | \small Authors are in alphabetic order and have equal contribution.
+
+
 output:
   pdf_document:
     extra_dependencies:
+    - caption
     - bbm
     - xcolor
 fontsize: 12
 bibliography: references.bib
 csl: citation_style.csl
 ---
+
 \pagebreak
 
 
@@ -45,7 +49,23 @@ Our data set, and consequently, our analyses have some limitations as well. For 
 
 
 
+
 ## Data Collection and exploration
+
+The data were collected from the Kaggle website (kaggle.com) which is an opensource and online community of data scientists and machine learning practitioners. One can easily access the online version of our data through @carprice. The data did not contain any missing values and was ready for analysis. However, we made minor changes and corrections in the data set. 
+
+We removed the CAR ID column as it does not contain any useful information for our analyses. Additionally, we changed the names of the cars into the names of the manufacturer. This way, the variable would represent the car brand (or manufacturer) reputation, which might have impact on car price, instead of the model of the car, which is unique for most of the cars and would not impact the car price. 
+
+Afterward, we tried to figure out the distribution of the response so that we use the appropriate family of distribution and link function. 
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.6\textwidth]{./Figures/car_price_dist.pdf}
+    \caption{Distribution of the price. \\(A) The distribution of the response (B) The distribution of the logarithm of the price.}
+    \label{fig: Dist_response_car}
+\end{figure}
+
 
 ## Statistical Analyses
 
@@ -64,6 +84,7 @@ This suggests that identifying the core health behaviors and risk factors influe
 This study has generally revealed causal factors in heart failure such as sex, exercise angina (a type of chest pain during performing exercises), distinctive types of chest pain, and squared Cholesterol level. 
 
 The generalisability of our results is subject to certain limitations. For instance, our data set does not cover younger generations (less than 28 years old), which will cause the analyses to be biased toward older ages. Another issue that was not addressed in this study was the mortality of the patients. This might not seem arguable at first look. However, many patients with asymptomatic chest pain might have lived without any critical problems throughout their lives, and patients with other types of chest pain might have faced devastating situations. This might cause our findings to be questionable from different perspectives. Overall, our study concluded significant risk factors in heart failure. The following chapters are a detailed description of our analyses, methods, and results.
+
 
 ## Data Collection and exploration
 
