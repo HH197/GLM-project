@@ -1,6 +1,9 @@
 
 library(readr)
+library(ggplot2)
+library(dplyr)
 
+##### Car price ###### 
 car_dat <- read_csv("C:/Users/Hamid/Desktop/price_data/CarPrice_Assignment.csv")
 test_string<-toString(car_dat$CarName[1])
 strsplit(test_string,"-")
@@ -63,8 +66,6 @@ expo_model_price<-glm(price~., data= car_dat3[, -c(6,7,9)],family= Gamma(link = 
 (sum_mod_expo<-summary(expo_model_price,dispersion=1))
 
 
-library(ggplot2)
-
 
 ## distribution plots
 p1 <- ggplot(car_dat3) + aes(x =price) + 
@@ -88,11 +89,12 @@ p <-
                   labels = c("A", "B"),
                   ncol = 1, nrow = 2)
 p
-ggsave('C:/Users/Hamid/Desktop/car_price_dist.jpeg', p, width = 7, height = 8)
+ggsave('C:/Users/Hamid/Desktop/car_price_dist.pdf', p, width = 7, height = 8)
 
 ## Box plots
-ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
-  geom_boxplot() + 
+p <- 
+  ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
+  geom_boxplot(lwd=0.25) + 
   xlab('Company') + ylab('Price')+
   scale_fill_manual(values=c("#cc0099", "#3399ff"), 
                     name = "Fuel Type", 
@@ -100,26 +102,14 @@ ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
   theme_classic() + 
   theme(axis.text.x = element_text(angle = 45,vjust = 0.5))
 
-
-library("dplyr")
-ordered_names <- car_dat3 %>% group_by(car_company) %>% summarize(count=n()) %>% arrange(-count)
-
-ordered_names <- ordered_names$car_company
-
-ggplot(car_dat3) + aes(x =car_company) + 
-  geom_bar(size=0.5,color="black", fill="#4d79ff")+ 
-  xlab('Company') + ylab('Number of samples')+
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits=ordered_names)+
-  theme_classic() +
-  theme(line = element_line(size = 0.5),
-        axis.text.x = element_text(angle = 45,vjust = 0.7))
+ggsave('C:/Users/Hamid/Desktop/car_company.pdf', p, width = 8, height = 5)
 
 
 car_dat3$cylindernumber <- factor(car_dat3$cylindernumber, levels=c('two', 'three', 'four', 'five',  'six', 'eight', 'twelve'),
                                   labels=c('Two', 'Three', 'Four', 'Five',  'Six', 'Eight', 'Twelve'))
 
-ggplot(car_dat3) +
+p<- 
+  ggplot(car_dat3) +
   aes(x = enginesize, y = price, color = cylindernumber) +
   geom_point(color = "black") +
   geom_smooth(method = "lm", alpha = 0.2) + 
@@ -127,23 +117,27 @@ ggplot(car_dat3) +
   scale_colour_brewer(palette = "Set1", name = "Cylinder Number")+
   theme_classic()
 
+ggsave('C:/Users/Hamid/Desktop/engine_size.pdf', p, width = 8, height = 5)
+
 res <- car_dat3 %>% mutate(category=cut(wheelbase, breaks=4, labels=c("1","2","3", "4")))
 
 p <- 
   ggplot(res) +
   aes(x = category, y = price) +
   geom_boxplot(color = "#3399ff") + stat_summary(fun=median, geom="line", aes(group=1), color = "#cc0099")  + 
-  stat_summary(fun=median, geom="point", color = "#cc0099")+ ggtitle('The square effect of wheel base on price')+
+  stat_summary(fun=median, geom="point", color = "#cc0099")+ #ggtitle('The square effect of wheel base on price')+
   xlab('Wheel base groups') + ylab('Price')+
   theme_classic()
 p
-ggsave('C:/Users/Hamid/Desktop/wheel base groups.jpeg', p, width = 4, height = 5)
+ggsave('C:/Users/Hamid/Desktop/wheel base groups.pdf', p, width = 4, height = 5)
+
+
 ##### Heart disease ###### 
+
 heart_disease <- read_csv("C:/Users/Hamid/Desktop/heart.csv")
 
 heart_disease$HeartDisease <- factor(heart_disease$HeartDisease, levels = c(0, 1), labels = c('No', 'Yes'))
 heart_disease$Sex <- factor(heart_disease$Sex, levels = c('F', 'M'), labels = c('Female', 'Male'))
-
 
 
 
@@ -165,12 +159,15 @@ p<-
   scale_fill_manual(values=c("#3399ff", "#cc0099"), 
                     name = "Heart Disease")+
   theme_classic() + 
-  theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+  theme(line = element_line(size = 0.5), strip.background = element_blank(), strip.text = element_text(size = 12), 
+        legend.title = element_text(size=8), legend.text = element_text(size = 6)) + 
+  guides(color = guide_legend(override.aes = list(size = 0.2)))
 
 p
-ggsave('C:/Users/Hamid/Desktop/age_heart_sex.jpeg', p, width = 8, height = 5)
+ggsave('C:/Users/Hamid/Desktop/age_heart_sex.pdf', p, width = 8, height = 4)
 
-##Box plot cholestrol
+##Box plot cholesterol
+
 p <- ggplot(heart_disease, aes(y = Cholesterol, x=HeartDisease))+
   geom_boxplot(colour = "#cc0099") +
   xlab('Heart Disease') + ylab('Cholesterol')+
@@ -181,7 +178,9 @@ p <- ggplot(heart_disease, aes(y = Cholesterol, x=HeartDisease))+
 
 p
 ggsave('C:/Users/Hamid/Desktop/cholestrol.jpeg', p, width = 4, height = 5)
+
 ### exercise
+
 df <- heart_disease %>% group_by(HeartDisease, ExerciseAngina, Sex) %>% count()
 ex_ang_plot <- 
   ggplot(df, aes(y = n, x=ExerciseAngina, fill=HeartDisease)) + facet_grid(.~Sex)+
@@ -201,14 +200,14 @@ p <-
 
 
 p
-ggsave('C:/Users/Hamid/Desktop/chest_pain_exercise_angina.jpeg', p, width = 8, height = 8)
+ggsave('C:/Users/Hamid/Desktop/chest_pain_exercise_angina.pdf', p, width = 8, height = 8)
 ## 
 p <- 
   ggplot(heart_disease, aes(y = Oldpeak, x=HeartDisease))+
   geom_boxplot(colour = "#cc0099") +
-  xlab('Heart Disease') + ylab('Old peak')+
+  xlab('Heart Failure') + ylab('Oldpeak')+
   theme_classic() + 
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
 p
-ggsave('C:/Users/Hamid/Desktop/old_peak.jpeg', p, width = 5, height = 5)
+ggsave('C:/Users/Hamid/Desktop/old_peak.pdf', p, width = 5, height = 5)

@@ -1,51 +1,133 @@
 ---
-title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n|
-  \\ \\Huge Heart Disease Classification\n"
+title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n| \\ \\Huge Heart
+  Disease Classification\n"
 author: |
   | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
   | \small Authors are in alphabetic order and have equal contribution.
+
+
 output:
   pdf_document:
     extra_dependencies:
+    - caption
     - bbm
     - xcolor
-    toc: yes
-  html_document:
-    df_print: paged
-    toc: yes
-  html_notebook:
-    toc: yes
-  fontsize: 12
+fontsize: 12
+bibliography: references.bib
+csl: citation_style.csl
 ---
+
 \pagebreak
-\pagebreak
 
 
-
-\centering
-\raggedright
 \newpage
 \tableofcontents
 
 
-
+\pagebreak
 
 # Abstract
+
+Generalized Linear Models (GLMs) are the extension of the ordinary linear regression models. GLMs enable us to use different distributions for the response with distinctive link functions @GLMintroduction. Here, we use two different data sets to show the broad applications of the GLMs in real-world problems, one of which is the "Car Price Prediction" @carprice, and the other is "Heart Failure prediction" @heartdata. In our analyses, we focus on model fitting and highlighting the most important variables instead of predicting desired outcomes and their accuracy. Our study of each data set is reported in its corresponding section. In the following, we discuss why we have chosen these data sets and provide a detailed description of our analyses along with the reasons and intuitions behind them. In both of these studies, all analyses were performed using the R programming language @R-base.
+
+\pagebreak
+
+
+
 # Car Price Prediction
+
 ## Introduction
+
+One of the largest automotive markets in the world is the USA car market @carmarketUSA. Since 1982, when Honda invested in the USA car market, many other companies have been joining and competing in the USA car market resulting in foreign investment of more than $110 billion @carmarketUSA. These days, with skilled workers, local and governmental supports, a huge consumer market, and many other reasons, the USA car market is a primer market in the car industry. A new Chinese car company wants to join and compete in the USA car market. In the following, our goal is to identify significant variables affecting the car price and quantify their significance. These analyses are usually performed by a third party, such as a consulting company, or the business strategy division of the investing company. According to our findings, they can manipulate many variables, such as the car design, to have a better business strategy to enter the USA car market. These analyses can directly affect the success of billions of dollars investment. Consequently, our analyses are vital and should be detailed and valid.
+
+We found out the car price (response) distribution is quite close to the Gamma distribution; therefore, we used the GLM with Gamma distribution and logarithmic link function to model the price of cars for distinctive variables. We also suspected that it might be possible to model the logarithm of price with Gaussian distribution and identity link function. However, the distribution of the logarithmic price is not close to the Normal distribution. Consequently, we only used the Gamma distribution with the logarithmic link function. We performed variable selection and selected the most reasonable model (details in the Statistical Analyses section). 
+
+Using these analyses, we were able to identify several significant variables contributing to the car price, such as the car manufacturer (or the so-called brand of the car), the engine location (cars with rear engines are usually sports cars with higher prices), and the engine size (the bigger the higher the price).
+
+Our data set, and consequently, our analyses have some limitations as well. For instance, electric cars are more than 2.5% of the USA car market @electricmarket but are not included in our data set. Additionally, luxury brands such as Rolls-Royce and Lincoln are missing. Furthermore, the majority of sports cars are missing in our data set, showing our limitation in analyzing the sports and luxury car price variables. In the following, we present a detailed description of our analysis, methods, and results. 
+
+
+
+
+
 ## Data Collection and exploration
-## Statistical Analysis
+
+The data were collected from the Kaggle website (kaggle.com), an online open-source community of data scientists and machine learning practitioners. One can easily access the online version of our data through @carprice. The data did not contain any missing values and was ready for analysis. However, we made minor changes and corrections in the data set. 
+
+We removed the CAR ID column as it does not contain useful information for our analyses. Additionally, we changed the names of the cars into manufacturers' names. This way, the variable would represent the car brand (or manufacturer) reputation, which might have an impact on car price, instead of the model of the car, which is unique for most cars and would not impact the car price. 
+
+Afterward, we tried to figure out the response distribution to use the appropriate link function and family of distribution @GLMintroduction. The distribution of the response resembles the Gamma distribution (Figure \ref{fig: Dist_response_car} (A)). We also visualized the logarithm of the response since it might be Gaussian (Figure \ref{fig: Dist_response_car} (B)). As one can see in Figure \ref{fig: Dist_response_car} (B), the logarithm of price does not resemble the Gaussian distribution. Therefore, we decided to only use the Gamma distribution with the log link function (See Statistical Analyses for more details). 
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.6\textwidth]{./Figures/car_price_dist.pdf}
+    \caption{Distribution of the price. \\(A) The distribution of the response (B) The distribution of the logarithm of the response.}
+    \label{fig: Dist_response_car}
+\end{figure}
+
+Figure \ref{fig: car_company} shows an overview of the manufacturers, the range of their cars' prices, and the fuel type of their productions. As it is obvious, electric cars are missing, and diesel cars are the minority. Moreover, as shown in Figure \ref{fig: car_company}, the car brands (or manufacturers) may affect the car price. For instance, cars from Porsche have a higher price compared to cars from Nissan or Mazda. Furthermore, we can see that famous sports car brands such as Ferrari and luxury manufacturers, such as Rolls-Royce and Lincoln, are missing. 
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth]{./Figures/car_company.pdf}
+    \caption{The range of car price in different brands and fuel types}
+    \label{fig: car_company}
+\end{figure}
+
+
+In Appendix Figure \ref{fig: engine_size}, we can see that the car price is correlated with engine size; however, it might not be a linear correlation. Also, what stands out in this figure is the general growth of the engine size with increasing the number of Cylinders, and also, the response will rise with increasing any of them.  
+
+
+We also suspected that there might be some trends with the quadratic increase of numerical variables. Therefore, we investigated these patterns. For instance, in Appendix Figure \ref{fig: wheelbase}, we divided the wheelbase^[In cars, the wheelbase is the distance between the front and rear wheels @Wheelbase.] of cars into four groups and visualized the trend between the wheelbase and the response. As this figure shows, the car price is not growing linearly with the increase of the wheelbase. Hence, we included quadratic terms in our statistical model as well. In the next section, the details of our statistical analyses are described. 
+
+
+
+## Statistical Analyses
+
 ## Conclusion
+
+
+\pagebreak
 
 # Heart Disease Classification
 
 ## Introduction
 
+Heart Failure, also known as congestive heart failure, can broadly be defined as a condition that happens when the heart cannot supply the body's need for Oxygen and blood @HeartFailure. According to the latest annual statistical report from the American Heart Association and the National Institutes of Health, about 6.2 million adults in the United States have heart failure @virani2020heart. Furthermore, in 2018, heart failure was mentioned on 379,800 death certificates (13.4%) @virani2020heart and cost about $30 billion annually @benjamin2019heart. 
+
+This suggests that identifying the core health behaviors and risk factors influencing heart failure is critical not only for our community health but also for our economy. Therefore, we decided to analyze the "Heart Failure prediction" data set @heartdata to find variables playing a key role in heart failure. As the response in our data set is binary (0 or 1), we used logistic regression to model the probability of having heart failure. Moreover, we performed variable selection to select the best model and determine major factors in heart failure (details in the Statistical Analyses section).
+
+This study has generally revealed causal factors in heart failure such as sex, exercise angina (a type of chest pain during performing exercises), distinctive types of chest pain, and squared Cholesterol level. 
+
+The generalisability of our results is subject to certain limitations. For instance, our data set does not cover younger generations (less than 28 years old), which will cause the analyses to be biased toward older ages. Another issue that was not addressed in this study was the mortality of the patients. This might not seem arguable at first look. However, many patients with asymptomatic chest pain might have lived without any critical problems throughout their lives, and patients with other types of chest pain might have faced devastating situations. This might cause our findings to be questionable from different perspectives. Overall, our study concluded significant risk factors in heart failure. The following chapters are a detailed description of our analyses, methods, and results.
+
+
+
 ## Data Collection and exploration
 
-## Statistical Analysis
+The data were collected from the Kaggle website (kaggle.com), an online open-source community of data scientists and machine learning practitioners. One can easily access the online version of our data through @heartdata. The data contain 918 subjects with 11 covariates and one binary response (Heart Failure or not). The data do not have any missing values and are ready for analysis.
 
-### 3 GLM models and stepwise AIC selection
+Figure \ref{fig: age_heart_sex} represents the distribution of age in samples for their sexuality and heart condition. As it is obvious, the number of male samples is dramatically higher than female samples indicating whether our data set is biased or males have more heart failure than females. According to two distinctive independent studies, men have more incidents of heart failure, which is consistent with our data set @stromberg2003gender, @mehta2006gender. Another observation in Figure \ref{fig: age_heart_sex} is that the range of the age starts from 28, showing that our data set does not contain younger generations, and our analysis is not valid for younger ages.
+
+
+As shown in Appendix Figure \ref{fig: chest_pain_exercise_angina} (A), asymptomatic chest pain type is more frequent in men and women, and also samples with asymptomatic chest pain type are more exposed to heart failure. This observation is not surprising because patients with heart failure may show symptoms @Heartchest. Appendix Figure \ref{fig: chest_pain_exercise_angina} (B) presents that samples with exercise-induced angina^[Angina is a type of chest pain caused by reduced blood flow to the heart @Angina.] are more exposed to heart failure in both sex groups.
+
+In Appendix Figure \ref{fig: oldpeak}, we can see that the patients with heart problems have higher oldpeak^[ST depression induced by exercise relative to rest @palaniappan2008intelligent.], and as one might suspect, the heart failure might be affected by the quadratic of the oldpeak as well. Therefore, we decided to include quadratic forms of numerical variables in our modeling as well. A detailed description of the main findings, together with our conclusion, is provided in the next chapters. 
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=\textwidth]{./Figures/age_heart_sex.pdf}
+    \caption{The distribution of the age of the samples with respect to their sex and heart condition}
+    \label{fig: age_heart_sex}
+\end{figure}
+
+
+## Statistical Analyses
+
+### Three GLM models and stepwise AIC selection
 
 To begin with, let's assign each feature with a variable name.
 
@@ -74,7 +156,7 @@ To begin with, let's assign each feature with a variable name.
  \hline
  \end{tabular}
  
- #### Modeling All the Main Covariates
+#### Modeling All the Main Covariates
  
  Since the response is having heart disease or not, it is a binomial distributed response. So it is suggested we could use a logistic regression model.
  At first, we created a logistic model of all the main effects, and the formula of the model is
@@ -266,12 +348,56 @@ LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-288.2246
 $$
 with 11 degrees of freedom. So the p-value is 0.699, which means the reduction is acceptable. 
 
-### Analysis of the 3 Models
+### Analysis of the Three Models
 
 1. ROC, Deviance Test, Pseudo-R square, 
 
 ## Conclusion
 
-# References
+
 # Appendix
+
+\pagebreak
+## Appendix Figures
+
+
+\renewcommand{\figurename}{Appendix Figure}
+\setcounter{figure}{0}
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\textwidth]{./Figures/engine_size.pdf}
+    \caption{The correlation between engine size and price for distinctive number of Cylinders}
+    \label{fig: engine_size}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.35\textwidth]{./Figures/wheel_base_groups.pdf}
+    \caption{The quadratic increase of price with different groups of wheelbase.}
+    \label{fig: wheelbase}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/chest_pain_exercise_angina.pdf}
+    \caption{The number of samples with different chest pain type and exercise angina. (A) The distinctive chest pain types in different genders. TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic (B) Number of samples with exercise angina with respect to their sex. Y: Yes, with exercise angina and N: No, without exercise angina.}
+    \label{fig: chest_pain_exercise_angina}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.6\textwidth]{./Figures/old_peak.pdf}
+    \caption{The relationship between having heart disease and the oldpeak.}
+    \label{fig: oldpeak}
+\end{figure}
+
+
+\pagebreak
+# References
 
