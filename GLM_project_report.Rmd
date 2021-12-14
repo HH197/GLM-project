@@ -77,10 +77,10 @@ Figure \ref{fig: car_company} shows an overview of the manufacturers, the range 
 \end{figure}
 
 
-In (Appendix Figure \ref{fig: engine_size}), we can see that the car price is correlated with engine size; however, it might not be a linear correlation. Also, what stands out in this figure is the general growth of the engine size with increasing the number of Cylinders, and also, the response will rise with increasing any of them.  
+In Appendix Figure \ref{fig: engine_size}, we can see that the car price is correlated with engine size; however, it might not be a linear correlation. Also, what stands out in this figure is the general growth of the engine size with increasing the number of Cylinders, and also, the response will rise with increasing any of them.  
 
 
-We also suspected that there might be some trends with the quadratic increase of numerical variables. Therefore, we investigated these patterns. For instance, in (Appendix Figure \ref{fig: wheelbase}), we divided the wheelbase^[In cars, the wheelbase is the distance between the front and rear wheels @Wheelbase.] of cars into four groups and visualized the trend between the wheelbase and the response. As this figure shows, the car price is not growing linearly with the increase of the wheelbase. Hence, we included quadratic terms in our statistical model as well. In the next section, the details of our statistical analyses are described. 
+We also suspected that there might be some trends with the quadratic increase of numerical variables. Therefore, we investigated these patterns. For instance, in Appendix Figure \ref{fig: wheelbase}, we divided the wheelbase^[In cars, the wheelbase is the distance between the front and rear wheels @Wheelbase.] of cars into four groups and visualized the trend between the wheelbase and the response. As this figure shows, the car price is not growing linearly with the increase of the wheelbase. Hence, we included quadratic terms in our statistical model as well. In the next section, the details of our statistical analyses are described. 
 
 
 
@@ -95,7 +95,7 @@ We also suspected that there might be some trends with the quadratic increase of
 
 ## Introduction
 
-Heart Failure, also known as cognitive heart failure, can broadly be defined as a condition that happens when the heart cannot supply the body's need for Oxygen and blood @HeartFailure. According to the latest annual statistical report from the American Heart Association and the National Institutes of Health, about 6.2 million adults in the United States have heart failure @virani2020heart. Furthermore, in 2018, heart failure was mentioned on 379,800 death certificates (13.4%) @virani2020heart and cost about $30 billion annually @benjamin2019heart. 
+Heart Failure, also known as congestive heart failure, can broadly be defined as a condition that happens when the heart cannot supply the body's need for Oxygen and blood @HeartFailure. According to the latest annual statistical report from the American Heart Association and the National Institutes of Health, about 6.2 million adults in the United States have heart failure @virani2020heart. Furthermore, in 2018, heart failure was mentioned on 379,800 death certificates (13.4%) @virani2020heart and cost about $30 billion annually @benjamin2019heart. 
 
 This suggests that identifying the core health behaviors and risk factors influencing heart failure is critical not only for our community health but also for our economy. Therefore, we decided to analyze the "Heart Failure prediction" data set @heartdata to find variables playing a key role in heart failure. As the response in our data set is binary (0 or 1), we used logistic regression to model the probability of having heart failure. Moreover, we performed variable selection to select the best model and determine major factors in heart failure (details in the Statistical Analyses section).
 
@@ -109,11 +109,12 @@ The generalisability of our results is subject to certain limitations. For insta
 
 The data were collected from the Kaggle website (kaggle.com), an online open-source community of data scientists and machine learning practitioners. One can easily access the online version of our data through @heartdata. The data contain 918 subjects with 11 covariates and one binary response (Heart Failure or not). The data do not have any missing values and are ready for analysis.
 
-(Figure \ref{fig: age_heart_sex}) represents the distribution of age in samples with respect to their sexuality and heart condition. As it is obvious, the number of male samples is dramatically higher than female samples indicating whether our data set is biased or males have more heart failure than females. According to two distinctive independent studies, men have more incident of heart failure which is consistent with our data set @stromberg2003gender, @mehta2006gender. Another evident observation in (Figure \ref{fig: age_heart_sex}) is that the range of the age is starting from 28 showing that our data set does not contain younger generation, and our analysis is not valid for younger ages.
+Figure \ref{fig: age_heart_sex} represents the distribution of age in samples for their sexuality and heart condition. As it is obvious, the number of male samples is dramatically higher than female samples indicating whether our data set is biased or males have more heart failure than females. According to two distinctive independent studies, men have more incidents of heart failure, which is consistent with our data set @stromberg2003gender, @mehta2006gender. Another observation in Figure \ref{fig: age_heart_sex} is that the range of the age starts from 28, showing that our data set does not contain younger generations, and our analysis is not valid for younger ages.
 
 
+As shown in Appendix Figure \ref{fig: chest_pain_exercise_angina} (A), asymptomatic chest pain type is more frequent in men and women, and also samples with asymptomatic chest pain type are more exposed to heart failure. This observation is not surprising because patients with heart failure may show symptoms @Heartchest. Appendix Figure \ref{fig: chest_pain_exercise_angina} (B) presents that samples with exercise-induced angina^[Angina is a type of chest pain caused by reduced blood flow to the heart @Angina.] are more exposed to heart failure in both sex groups.
 
-
+In Appendix Figure \ref{fig: oldpeak}, we can see that the patients with heart problems have higher oldpeak^[ST depression induced by exercise relative to rest @palaniappan2008intelligent.], and as one might suspect, the heart failure might be affected by the quadratic of the oldpeak as well. Therefore, we decided to include quadratic forms of numerical variables in our modeling as well. A detailed description of the main findings, together with our conclusion, is provided in the next chapters. 
 
 \begin{figure}[h]
     \centering
@@ -200,6 +201,23 @@ So we fitted the model, and got the estimated shown in the table below.
     \label{fig: wheelbase}
 \end{figure}
 
-\pagebreak
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/chest_pain_exercise_angina.pdf}
+    \caption{The number of samples with different chest pain type and exercise angina. (A) The distinctive chest pain types in different genders. TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic (B) Number of samples with exercise angina with respect to their sex. Y: Yes, with exercise angina and N: No, without exercise angina.}
+    \label{fig: chest_pain_exercise_angina}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.6\textwidth]{./Figures/old_peak.pdf}
+    \caption{The relationship between having heart disease and the oldpeak.}
+    \label{fig: oldpeak}
+\end{figure}
+
+
+\pagebreak
 # References
+

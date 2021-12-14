@@ -200,14 +200,14 @@ p <-
 
 
 p
-ggsave('C:/Users/Hamid/Desktop/chest_pain_exercise_angina.jpeg', p, width = 8, height = 8)
+ggsave('C:/Users/Hamid/Desktop/chest_pain_exercise_angina.pdf', p, width = 8, height = 8)
 ## 
 p <- 
   ggplot(heart_disease, aes(y = Oldpeak, x=HeartDisease))+
   geom_boxplot(colour = "#cc0099") +
-  xlab('Heart Disease') + ylab('Old peak')+
+  xlab('Heart Failure') + ylab('Oldpeak')+
   theme_classic() + 
   theme(strip.background = element_blank(), strip.text = element_text(size = 12))
 
 p
-ggsave('C:/Users/Hamid/Desktop/old_peak.jpeg', p, width = 5, height = 5)
+ggsave('C:/Users/Hamid/Desktop/old_peak.pdf', p, width = 5, height = 5)
