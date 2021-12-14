@@ -74,16 +74,19 @@ To begin with, let's assign each feature with a variable name.
  \hline
  \end{tabular}
  
+ #### Modeling All the Main Covariates
+ 
  Since the response is having heart disease or not, it is a binomial distributed response. So it is suggested we could use a logistic regression model.
  At first, we created a logistic model of all the main effects, and the formula of the model is
 $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
 $$
 where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
-So we fitted the model, and got the estimated parameters shown in the table below.
+So we fitted the model, and got the estimated parameters shown in the table below. 
+
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
  \hline
  & Estimate & Pr(>|z|) & significance\\ 
  \hline
@@ -110,7 +113,7 @@ As we can see from the table, there are some variables that are not significant.
 And we get our estimated paraeters shown in the table below.
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
  \hline
  & Estimate & Pr(>|z|) & significance\\ 
  \hline
@@ -155,7 +158,114 @@ LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-297.0925
 $$
 with degrees of freedom of 4. So we can calculate the p-value is 0.8046016, which is very high. So we cannot reject $H_0$. So we can accept the reduced model.
 
- 
+
+#### Modeling the Square of Numerical Variables 
+
+Now we investigated the square of the numerical variables. We did this approach because response may have some quadratic effect of the numerical variables, and square of categorical variables do not make any difference. The odds model is 
+
+$$
+\log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \beta_{12}x_1 ^2 + \beta_{42}x_4^2 + \beta_{72}x_7^2 + \beta_{102}x_{10}^2
+$$
+The model is fitted by R. And all the parameters and significance of them are demonstrated in the table below.
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+  & Estimate & Pr(>|z|) & significance\\
+\hline
+(Intercept) & 3.34e+00 & 4.96e-01 & not significant\\
+Age & -2.90e-02 & 7.86e-01 & not significant\\
+SexM & 1.49e+00 & 2.00e-07 & ***\\
+ChestPainTypeATA & -1.71e+00 & 2.00e-07 & ***\\
+ChestPainTypeNAP & -1.68e+00 & 0.00e+00 & ***\\
+ChestPainTypeTA & -1.38e+00 & 2.31e-03 & .\\
+RestingBP & -2.86e-02 & 5.47e-01 & not significant\\
+Cholesterol & -1.16e-02 & 2.87e-05 & **\\
+FastingBS & 1.08e+00 & 1.73e-04 & *\\
+RestingECGNormal & -1.65e-01 & 5.53e-01 & not significant\\
+RestingECGST & -2.96e-01 & 4.10e-01 & not significant\\
+MaxHR & -2.29e-02 & 5.81e-01 & not significant\\
+ExerciseAnginaY & 1.08e+00 & 2.09e-05 & **\\
+Oldpeak & -3.04e-01 & 3.33e-01 & not significant\\
+ST\_SlopeFlat & 1.77e+00 & 1.12e-04 & *\\
+ST\_SlopeUp & -7.29e-01 & 1.26e-01 & not significant\\
+I(MaxHR\textasciicircum{}2) & 7.45e-05 & 6.24e-01 & not significant\\
+I(Age\textasciicircum{}2) & 4.72e-04 & 6.37e-01 & not significant\\
+I(Oldpeak\textasciicircum{}2) & 2.67e-01 & 1.96e-02 & .\\
+I(RestingBP\textasciicircum{}2) & 1.20e-04 & 4.95e-01 & not significant\\
+I(Cholesterol\textasciicircum{}2) & 2.17e-05 & 2.22e-03 & .\\
+\hline
+\end{tabular}
+\end{center}
+
+But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical model. The parameters and their significance of selected model are shown in the table.
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+  & Estimate & Pr(>|z|) & significance\\
+  \hline
+(Intercept) & -1.05e+00 & 1.25e-01 & not significant\\
+SexM & 1.50e+00 & 1.00e-07 & ***\\
+ChestPainTypeATA & -1.72e+00 & 1.00e-07 & ***\\
+ChestPainTypeNAP & -1.68e+00 & 0.00e+00 & ***\\
+ChestPainTypeTA & -1.37e+00 & 1.98e-03 & .\\
+Cholesterol & -1.18e-02 & 9.90e-06 & ***\\
+FastingBS & 1.05e+00 & 2.10e-04 & *\\
+ExerciseAnginaY & 1.02e+00 & 1.92e-05 & **\\
+ST\_SlopeFlat & 1.74e+00 & 1.20e-04 & *\\
+ST\_SlopeUp & -7.23e-01 & 1.22e-01 & not significant\\
+I(Age\textasciicircum{}2) & 2.22e-04 & 4.77e-02 & .\\
+I(Oldpeak\textasciicircum{}2) & 1.70e-01 & 2.21e-04 & *\\
+I(Cholesterol\textasciicircum{}2) & 2.24e-05 & 1.44e-03 & .\\
+\hline
+\end{tabular}
+\end{center}
+
+We now apply Log-likelihood ratio test to get
+$$
+LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-286.9175 +288.5404) =3.245983
+$$
+with 4 degrees of freedom. So the p-value is 0.9179859, which means the reduction is highly possible.
+
+#### Modeling the Interaction of Numerical
+We also modeled the interaction between numerical terms, and the model is 
+$$
+\log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \sum_{i \in \mathcal{N}}
+\beta_{i2}x_i ^2 + \sum_{i \in \mathcal{N}}\sum_{j \in \mathcal{N}}\beta_{ij}x_i x_j
+$$
+We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table below 
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+  & Estimate & Pr(>|z|) & significance\\
+  \hline
+(Intercept) & -1.950000 & 1.29e-01 & not significant\\
+Age & 0.021300 & 9.17e-02 & not significant\\
+SexM & 1.420000 & 4.00e-07 & ***\\
+ChestPainTypeATA & -1.810000 & 0.00e+00 & ***\\
+ChestPainTypeNAP & -1.660000 & 0.00e+00 & ***\\
+ChestPainTypeTA & -1.450000 & 9.97e-04 & *\\
+Cholesterol & -0.003860 & 2.71e-04 & *\\
+FastingBS & 1.200000 & 1.44e-05 & **\\
+MaxHR & 0.000751 & 8.97e-01 & not significant\\
+ExerciseAnginaY & 0.993000 & 6.60e-05 & **\\
+Oldpeak & 0.668000 & 3.73e-01 & not significant\\
+ST\_SlopeFlat & 1.810000 & 7.59e-05 & **\\
+ST\_SlopeUp & -0.732000 & 1.20e-01 & not significant\\
+I(Oldpeak\textasciicircum{}2) & 0.324000 & 6.27e-03 & .\\
+MaxHR:Oldpeak & -0.007750 & 1.42e-01 & not significant\\
+\hline
+\end{tabular}
+\end{center}
+
+Similarly, we did a Log-likelihood ratio test to the reduction, and get
+$$
+LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-288.2246 +292.3055) =8.161785
+$$
+with 11 degrees of freedom. So the p-value is 0.699, which means the reduction is acceptable. 
+
 ### Analysis of the 3 Models
 
 1. ROC, Deviance Test, Pseudo-R square, 
