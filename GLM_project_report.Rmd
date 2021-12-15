@@ -234,7 +234,7 @@ $$
 H_0: \beta_\text{RestingBP} = \beta_\text{RestingECG} = \beta_\text{MaxHR} =0 \text{  v.s } H_1: \text{At least one of these parameters not 0}
 $$
 
-We using the formula to get LLR statistic as
+We used the formula to get LLR statistic as
 $$
 LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-297.0925 +297.9042) =0.804
 $$
@@ -308,7 +308,17 @@ We now apply Log-likelihood ratio test to get
 $$
 LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-286.9175 +288.5404) =3.245983
 $$
-with 4 degrees of freedom. So the p-value is 0.9179859, which means the reduction is highly possible.
+with 4 degrees of freedom. So the p-value is 0.9179859, which means the reduction is highly possible. The formula for **model 2** is
+
+$$
+\begin{aligned}
+\log \frac{\hat p}{1-\hat p} = & -1.1  + 1.5 \text{SexM} -1.7 \text{ChestPainTypeATA}\\ 
+&- 1.7 \text{ChestPainTypeNAP} - 1.4 \text{ChestPainTypeTA} - 0.0012 \text{Cholesterol}\\
+&+ 1.0 \text{FastingBS} + 1.0 \text{ExerciseAnginaY} \\
+&+ 1.7 \text{ST\_slopeFlat} - 7.2 \text{ST\_slopeUp} \\
+& + 2.2 \times 10^{-4} \text{Age}^2 + 1.7 \text{Oldpeak} ^2 + 2.2 \times 10^{-5} \text{Cholesterol} ^2
+\end{aligned}
+$$
 
 #### Modeling the Interaction of Numerical
 We also modeled the interaction between numerical terms, and the model is 
@@ -316,7 +326,7 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \sum_{i \in \mathcal{N}}
 \beta_{i2}x_i ^2 + \sum_{i \in \mathcal{N}}\sum_{j \in \mathcal{N}}\beta_{ij}x_i x_j
 $$
-We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table below 
+where $\mathcal N = \{1, 4, 7, 10\}$, which means the set of numerical variables. We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table below 
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -346,18 +356,88 @@ Similarly, we did a Log-likelihood ratio test to the reduction, and get
 $$
 LLR = 2(\ell(\text{full model}) - \ell(\text{reduced mode})) = 2\times(-288.2246 +292.3055) =8.161785
 $$
-with 11 degrees of freedom. So the p-value is 0.699, which means the reduction is acceptable. 
+with 11 degrees of freedom. So the p-value is 0.699, which means the reduction is acceptable. And the formula for **model 3** is
+
+$$
+\begin{aligned}
+\log \frac{\hat p}{1- \hat p} = & -1.9  + 0.02 \text{Age} + 1.4 \text{SexM} -1.8 \text{ChestPainTypeATA}\\ 
+& - 1.7 \text{ChestPainTypeNAP} - 1.4 \text{ChestPainTypeTA} - 0.0039 \text{Cholesterol}\\
+& + 1.19 \text{FastingBS} + 7.5 \times 10^{-4} \text{MaxHR} + 1.0 \text{ExerciseAnginaY} \\
+& + 1.8 \text{ST\_slopeFlat} - 0.73 \text{ST\_slopeUp} \\
+& +0.32 \text{Oldpeak} ^2 \\
+& -7.7 \times 10^{-3} \text{MaxHR} \times \text{Oldpeak}         
+\end{aligned}
+$$
 
 ### Analysis of the Three Models
 
-1. ROC, Deviance Test, Pseudo-R square, 
+#### Receiver operating characteristics (ROC) 
+graphs are useful for organizing classifiers and visualizing their performance @ROC. 
+ROC curves demonstrate true positive rate on the Y axis and false positive rate on the X axis with different decision criterion. If the ROC curve can reach left-up corner in the graph, false positive rate reach zero and true positive rate of 1, which means the model has an perfect classification @scikit.  Therefore, the more for CROC curve lean to the right-up corner, the better performance of the model has. The ROC curves for three models are shown in the plot\ref{fig: roc_curve}.
+
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.7\textwidth]{./Figures/roc_plot.png}
+    \caption{The ROC curves for Three Models}
+    \label{fig: roc_curve}
+\end{figure}
+
+In the ROC graph \lef{fig: roc_curve}, three models have almost coincided into the same curve, which means three models have similar performance. To further investigate, AUC, the area under the ROC curve was also calculated to compare three models. AUC for model 1 is 0.932, for model 2 and 3 are 0.9368, 0.936. Three AUC are very similar, as we expected.
+
+#### Pseudo-R square 
+
+Pseudo-R square sometimes is used to measure the explanatory of the model. The McFadden Pseudo-R square is stated below @walker2016nine. 
+
+$$
+R_{\mathrm{MF}}^{2}=1-\frac{\operatorname{LL}(\text { Full })}{\operatorname{LL}(\text { Null })}
+$$
+The McFadden Pseudo-R square is between 0 and 1. The higher value Pseudo-R square is, the higher explanatory the model have. 
+McFadden Pseudo-R square of the three models are calculated as 0.537, 0.543 and 0.528, among which model 2 has the highest value.
+
+#### Deviance Goodness of Fit
+
+Finally, we calculated the residual deviance for the three models. We have the null hypothesis that is $H_0$: the model fits well versus $H_1$: the model fits poorly.
+
+Model 1 has residual deviance of 595.81 on 906 degrees of freedom. Thus the p-value is near to 1. That means model 1 is a good fit. Model 2 has the deviance of 577.08  on 905  degrees of freedom. Thus p-value is approximate 1. Model 3 has 584.61 on 903 degrees of freedom with p-value 1. Among the deviance of three models, model 2 has the least value.
+
+#### The Akaike information criterion (AIC)
+AIC is a popular method for comparing the adequacy of multiple, possibly non-nested models.The objective of AIC model selection is to estimate the information loss when the probability distribution $f$
+associated with the true (generating) model is approximated by probability distribution $g$, associated with the
+model that is to be evaluated @wagenmakers2004aic. 
+For choosing a model from a sequence of model candidates $M_i$, $i = 1,2,\dots K$. The AIC is defined as
+$$
+\text{AIC}_i = -2 \log L_i + 2 V_i
+$$
+where $L_i$, the maximum likelihood for the candidate model i, is determined by adjusting the $V_i$ free parameters in such a way as to maximize the probability that the candidate model has generated the observed data @wagenmakers2004aic. Akaike showed that the model with lowest information loss has the lowest AIC @Akaike1998.     
+
+The AIC for three models are 619.81, 603.08 and 614.61, respectly, among which model 2 has the lowest value.
+
+#### Binned Residual Plots
+Residual plots, residual-versus-fitted values, is commonly used in linear regression models to diagnosis the model, such as to assess the validity of assumptions, to identify features not captured by the model, and to find outliers. But it is not useful for a binomial outcome model, because the response is discrete. Binned residual plots can be used to assess the binomial outcome model like logistic regression. 
+
+To construct a binned residual plot, Data are split into bins containing equal numbers of observations, and the average residual is plotted against the average predicted probability for each bin. For each bin,
+approximate 95% confidence limits are $\pm 2 \sqrt{p(1-p)/n}$, estimated by using standard deviation of residuals in each bin. If a model is good, most(95%) of the points are expected to lie between two confidence limits @kasza2015stata. 
+
+The binned residual of model 2 is shown in following graph\ref{fig: Binned 2}, the plots for other two models are shown in the appendix. Thus, We can conclude that three models are good, since most of the residuals lie within the confidence limits.
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\textwidth]{./Figures/binned plot 2.png}
+    \caption{Binned Residuals Plots for Model 2}
+    \label{fig: Binned 2}
+\end{figure}
+
+
 
 ## Conclusion
 
 
+\pagebreak
 # Appendix
 
-\pagebreak
 ## Appendix Figures
 
 
@@ -398,6 +478,22 @@ with 11 degrees of freedom. So the p-value is 0.699, which means the reduction i
 \end{figure}
 
 
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\textwidth]{./Figures/binned plot 1.png}
+    \caption{Binned Residuals Plots for Model 1}
+    \label{fig: Binned 1}
+\end{figure}
 \pagebreak
+
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.75\textwidth]{./Figures/binned plot 3.png}
+    \caption{Binned Residuals Plots for Model 3}
+    \label{fig: Binned 3}
+\end{figure}
+
 # References
 
