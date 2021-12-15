@@ -34,9 +34,9 @@ Generalized Linear Models (GLMs) are the extension of the ordinary linear regres
 
 
 
-# Car Price Prediction
+# 1. Car Price Prediction
 
-## Introduction
+## 1.1 Introduction
 
 One of the largest automotive markets in the world is the USA car market @carmarketUSA. Since 1982, when Honda invested in the USA car market, many other companies have been joining and competing in the USA car market resulting in foreign investment of more than $110 billion @carmarketUSA. These days, with skilled workers, local and governmental supports, a huge consumer market, and many other reasons, the USA car market is a primer market in the car industry. A new Chinese car company wants to join and compete in the USA car market. In the following, our goal is to identify significant variables affecting the car price and quantify their significance. These analyses are usually performed by a third party, such as a consulting company, or the business strategy division of the investing company. According to our findings, they can manipulate many variables, such as the car design, to have a better business strategy to enter the USA car market. These analyses can directly affect the success of billions of dollars investment. Consequently, our analyses are vital and should be detailed and valid.
 
@@ -50,7 +50,7 @@ Our data set, and consequently, our analyses have some limitations as well. For 
 
 
 
-## Data Collection and exploration
+## 1.2 Data Collection and exploration
 
 The data were collected from the Kaggle website (kaggle.com), an online open-source community of data scientists and machine learning practitioners. One can easily access the online version of our data through @carprice. The data did not contain any missing values and was ready for analysis. However, we made minor changes and corrections in the data set. 
 
@@ -88,7 +88,7 @@ We also suspected that there might be some trends with the quadratic increase of
 
 \pagebreak
 
-## Statistical Analyses
+## 1.3 Statistical Analyses
 
 In Car Price Dataset, we have 205 observations and 27 variables including the response variable (price). Before starting the statistical analysis, let us define the data dictionary in order to better understand our dataset. 
 
@@ -713,7 +713,7 @@ Finally, we did residual analysis to check whether our residuals follow normalit
 From the plot of standardized residual vs fitted, we can see that there is no obvious pattern within the standardized residuals. From the Normal QQ plot of standardized residuals, we can see that most of the standardized residuals revolve around the normality line and there is no residual that greatly deviates from that line. Hence, results from the standardized residuals indicate that our model is a good fit. 
 
 
-## Conclusion
+## 1.4 Conclusion
 
 Our best model include covariates: aspiration, enginetype, carbody, carcompany, carheight, curbweight, peakrpm, citympg, wheelbase, carlength, carwidth, enginesize and highwaympg. Before we proceed with the conclusion of this analysis, the following are some of the highlights of our parameter interpretations.  
 
@@ -736,9 +736,9 @@ Therefore, it can be concluded that although our model shows promising results f
 
 \pagebreak
 
-# Heart Disease Classification
+# 2. Heart Disease Classification
 
-## Introduction
+## 2.1 Introduction
 
 Heart Failure, also known as congestive heart failure, can broadly be defined as a condition that happens when the heart cannot supply the body's need for Oxygen and blood @HeartFailure. According to the latest annual statistical report from the American Heart Association and the National Institutes of Health, about 6.2 million adults in the United States have heart failure @virani2020heart. Furthermore, in 2018, heart failure was mentioned on 379,800 death certificates (13.4%) @virani2020heart and cost about $30 billion annually @benjamin2019heart. 
 
@@ -750,7 +750,7 @@ The generalisability of our results is subject to certain limitations. For insta
 
 
 
-## Data Collection and exploration
+## 2.2 Data Collection and exploration
 
 The data were collected from the Kaggle website (kaggle.com), an online open-source community of data scientists and machine learning practitioners. One can easily access the online version of our data through @heartdata. The data contain 918 subjects with 11 covariates and one binary response (Heart Failure or not). The data do not have any missing values and are ready for analysis.
 
@@ -770,9 +770,9 @@ In Appendix Figure \ref{fig: oldpeak}, we can see that the patients with heart p
 \end{figure}
 
 
-## Statistical Analyses
+## 2.3 Statistical Analyses
 
-### Three GLM models and stepwise AIC selection
+### 2.3.1 Three GLM models and stepwise AIC selection
 
 To begin with, let's assign each feature with a variable name \ref{table: data_dictionary}.
 
@@ -1061,7 +1061,7 @@ $$
 \end{aligned}
 $$
 
-### Analysis of the Three Models
+### 2.3.2 Analysis of the Three Models
 
 #### Receiver operating characteristics (ROC) 
 graphs are useful for organizing classifiers and visualizing their performance @ROC. 
@@ -1124,7 +1124,7 @@ The binned residual of model 2 is shown in following graph\ref{fig: Binned 2}, t
 
 
 
-## Conclusion
+## 2.4 Conclusion
 
 The best model to predict heart disease is model 2, which contains SexM, ChestPainTypeATA ChestPainTypeNAP, ChestPainTypeTA, Cholesterol, FastingBS, ExerciseAnginaY, ST\_slopeFlat, ST\_slopeUp, Age^2, Oldpeak ^2, Cholesterol ^2. The formula of the model 2 is displayed below.
 
@@ -1164,8 +1164,9 @@ There are still some limitations in our model. In the parameter interpretation (
 
 
 
+
 \pagebreak
-# Appendix
+# 3. Appendix
 
 ## Appendix Figures
 
@@ -1214,7 +1215,6 @@ There are still some limitations in our model. In the parameter interpretation (
     \caption{Binned Residuals Plots for Model 1}
     \label{fig: Binned 1}
 \end{figure}
-\pagebreak
 
 \begin{figure}[h]
     \centering
@@ -1224,5 +1224,8 @@ There are still some limitations in our model. In the parameter interpretation (
     \label{fig: Binned 3}
 \end{figure}
 
-# References
 
+
+\pagebreak
+
+# 4. References
