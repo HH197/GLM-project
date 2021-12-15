@@ -2,7 +2,7 @@
 title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n| \\ \\Huge Heart
   Disease Classification\n"
 author: |
-  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Nyein, and Yanzhao Qian
+  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Htet Chan Nyein (ID:90150020), and Yanzhao Qian
   | \small Authors are in alphabetic order and have equal contribution.
 
 
@@ -1178,7 +1178,6 @@ There are still some limitations in our model. In the parameter interpretation (
 
 ## Appendix Figures
 
-
 \renewcommand{\figurename}{Appendix Figure}
 \setcounter{figure}{0}
 
@@ -1231,6 +1230,379 @@ There are still some limitations in our model. In the parameter interpretation (
     \caption{Binned Residuals Plots for Model 3}
     \label{fig: Binned 3}
 \end{figure}
+
+\pagebreak
+
+## Appendix Code
+
+\begin{verbatim}
+#car price analysis
+library(readr)
+car_dat <- read_csv("./price_data/CarPrice_Assignment.csv")
+test_string<-toString(car_dat$CarName[1])
+strsplit(test_string,"-")
+test_string2<-toString(car_dat$CarName[4])
+test_vec<-c(strsplit(test_string2," "))
+
+
+test_car_comp<-c(rep(NA,nrow(car_dat)))
+test_car_list<-vector(mode = "list", length = nrow(car_dat))
+
+for(i in 1:nrow(car_dat)){
+  test_string<-toString(car_dat$CarName[i])
+  test_car_list[[i]]<-c(strsplit(test_string," "))
+  test_car_pre<-unlist(test_car_list[[i]][1])
+  test_car_comp[i]<-test_car_pre[1]
+}
+
+
+#change the typo
+car_comp_final<-c(rep(NA,nrow(car_dat)))
+
+for(i in 1:nrow(car_dat)){
+  if(test_car_comp[i]=="maxda"){
+    car_comp_final[i]<-"mazda"
+  }
+  else if(test_car_comp[i]=="Nissan"){
+    car_comp_final[i]<-"nissan"
+  }
+  else if(test_car_comp[i]=="porcshce"){
+    car_comp_final[i]<-"toyota"
+  }
+  else if(test_car_comp[i]=="vokswagen"){
+    car_comp_final[i]<-"volkswagen"
+  }
+  else if(test_car_comp[i]=="vw"){
+    car_comp_final[i]<-"volkswagen"
+  }
+  else if(test_car_comp[i]=="toyouta"){
+    car_comp_final[i]<-"toyota"
+  }
+  else{
+    car_comp_final[i]<-test_car_comp[i]
+  }
+}
+
+firstup <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+
+car_comp_final<-firstup(car_comp_final)
+
+
+car_dat$car_company<-car_comp_final
+
+View(car_dat[c(1:5),c(3,27)])
+
+
+
+
+hist(car_dat$price)
+#can use exponential regression or log linear model
+
+#remove the car id and car name because they are not useful in analysis
+#car name overlaps with car company variables
+car_dat2<-car_dat[,-c(1,3)]
+
+#extract character variables
+character_var<-car_dat2[, sapply(car_dat2, class) == 'character']
+character_var[sapply(character_var, is.character)] <- lapply(character_var[sapply(character_var, is.character)],
+                                                             as.factor)
+
+#extract non-character variables
+no_chara<-car_dat2[, sapply(car_dat2, class) != 'character']
+#summary(no_chara)
+car_dat3<-cbind(character_var,no_chara)
+
+#gamma model with all explanatory variables
+gamma_model_price1<-glm(price~., data= car_dat3[, -c(7,9)],family= Gamma(link = "log"))
+sum_mod_gamma<-summary(gamma_model_price1)
+
+#engine type and cylinders, fuel systems and fuel types are independent
+glm(price~., data= car_dat3[, -c(7,1)],family= Gamma(link = "log"))
+
+
+#using stepAIC to perform stepwise selection
+library(MASS)
+gamma_step_model <- stepAIC(gamma_model_price1, direction = "both", 
+                      trace = TRUE)
+gamma_step_sum<-summary(gamma_step_model)
+
+
+#glm(formula = price ~ aspiration + carbody + enginelocation + 
+#cylindernumber + car_company + wheelbase + carlength + carwidth + 
+#  carheight + curbweight + enginesize + boreratio + peakrpm + 
+#  citympg + highwaympg, family = Gamma(link = "log"), data = car_dat3[,-c(7, 9)])
+
+
+gamma_square<-glm(price~.+ I(wheelbase^2)+I(carlength^2)+
+                    I(carwidth^2)+I(carheight^2)+I(curbweight^2)+I(enginesize^2)+
+                    I(boreratio^2)+I(peakrpm^2)+I(citympg^2)+I(highwaympg^2)
+                , family = Gamma(link = "log"), data = car_dat3[,-c(7, 9)])
+
+
+summary(gamma_square)
+
+gamma_square_step<-stepAIC(gamma_square,direction = "both",trace=FALSE)
+
+summary(gamma_square_step)
+#lrttest for full model vs stepwise model (main effect)
+
+(loglik_full<-logLik(gamma_model_price1))
+(loglik_step<-logLik(gamma_step_model))
+(test_stat1<-loglik_full-loglik_step)
+(p_val1<-1-pchisq(test_stat1,8))
+#Our model is the same as full model (main effect)
+
+#lrttest for square(full model) vs stepwise square model
+(loglik_sq_full<-logLik(gamma_square))
+(loglik_sq_step<-logLik(gamma_square_step))
+(test_stat2<-loglik_sq_full-loglik_sq_step)
+(pval2<-1-pchisq(test_stat2,22))
+
+#Our model is the same as full model(square model)
+
+#Comparison of main effect model vs square model
+AIC(gamma_step_model)
+AIC(gamma_square_step)
+
+#The square model has the lower AIC than main effects model. Hence, the square model is the best. 
+
+
+#model adequacy main effect mod
+deviance(gamma_step_model)
+df.residual(gamma_step_model)
+pchisq(deviance(gamma_step_model),df.residual(gamma_step_model),lower.tail = FALSE)
+
+
+#model adequnacy square mod
+deviance(gamma_square_step)
+df.residual(gamma_square_step)
+pchisq(deviance(gamma_square_step),df.residual(gamma_square_step),lower.tail = FALSE)
+#model is adequate
+
+
+sum_square_step<-summary(gamma_square_step)
+
+
+#95% t family Confidence Interval for estimates
+coefficient_dat<-sum_square_step$coefficients[,c(1,2)]
+LL<-coefficient_dat[,1]-qt(0.975,df.residual(gamma_square_step))*coefficient_dat[,2]
+UL<-coefficient_dat[,1]+qt(0.975,df.residual(gamma_square_step))*coefficient_dat[,2]
+conf_int_dat<-data.frame(coefficient_dat,LL,UL)
+names(conf_int_dat)[3]<-"Lower Limit"
+names(conf_int_dat)[4]<-"Upper Limit"
+summary(conf_int_dat$Estimate[-1])
+
+
+pseudo_R2_gamma_step<-1-(gamma_step_sum$deviance/gamma_step_sum$null.deviance)
+
+pseudo_R2_square_step<-1-(sum_square_step$deviance/sum_square_step$null.deviance)
+
+
+
+#testing with standardized residual
+predict_car<-fitted(gamma_square_step)
+price_actual<-car_dat3$price
+std_res_car<-(price_actual-predict_car)/predict_car
+
+
+
+#standardized residuals constant variance plot 
+plot(predict_car,std_res_car,xlab='fitted values',ylab='standardized residuals')
+abline(h=0, col="blue")
+#analysis: no obvious pattern in the standardized residuals indicating constant 
+#variance
+
+
+#standardized residuals normality plot 
+qqnorm(std_res_car,ylab="sample quantiles",xlab="Theoretical Quantiles") 
+qqline(std_res_car)
+
+
+library(ggplot2)
+
+plot1<-ggplot(data.frame(predict_car,std_res_car),aes(x=predict_car,y=std_res_car))+
+  geom_point(aes(),col="blue")+
+  labs(y="standardized residuals", x = "fitted values")+
+  geom_hline(yintercept = 0)
+
+
+
+plot2<-ggplot(data.frame(std_res_car),aes(sample=std_res_car))+
+  labs(y="standardized residuals",x="normal quantiles")+
+  stat_qq()+stat_qq_line()
+
+
+
+library(gridExtra)
+grid.arrange(plot1,plot2,ncol=2)
+
+#analysis: all of the standardised residuals lies on the qqline, indicating residuals 
+#follow approximately normal distribution
+
+
+
+library(ggplot2)
+p <- ggplot(car_dat3) + aes(x =price) +
+  geom_histogram(aes(y=..density..), size=1,color="blue", fill="white", binwidth = 2000)+
+  geom_density(alpha=.05, fill="red", size = 1) +
+  ggtitle("Histogram of Price")+
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_classic() +
+  theme(line = element_line(size = 0.5))
+
+
+
+
+p2 <- ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
+  geom_boxplot() +
+  xlab('Company') + ylab('Price')+
+  ggtitle('Car Price and Company by Fuel Type')+
+  scale_fill_manual(values=c("#CC0099", "#3399FF"),
+                    name = "Fuel Type",
+                    labels = c("Diesel", "Gas"))+
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45,vjust = 0.5))
+
+
+
+library("dplyr")
+ordered_names <- car_dat3 %>% group_by(car_company) %>% summarize(count=n()) %>% arrange(-count)
+ordered_names <- ordered_names$car_company
+ggplot(car_dat3) + aes(x =car_company) +
+  geom_bar(size=1,color="black", fill="white")+
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_discrete(limits=ordered_names)+
+  theme_classic() +
+  theme(line = element_line(size = 0.5))+
+  ggtitle("Distribution of Car Company by Count")
+
+#heart disease analysis
+heart_disease<-read.csv('./heart.csv')
+heart_disease$HeartDisease<-as.factor(heart_disease$HeartDisease)
+heart_disease$ChestPainType<-as.factor(heart_disease$ChestPainType)
+heart_disease$ExerciseAngina<-as.factor(heart_disease$ExerciseAngina)
+heart_disease$ST_Slope<-as.factor(heart_disease$ST_Slope)
+heart_disease$Sex<-as.factor(heart_disease$Sex)
+summary(heart_disease)
+library(pROC)
+library(ggplot2)
+ggplot(data = heart_disease,  aes(x = Age,  y = RestingBP, color =  
+                 Sex)) + 
+     geom_point()
+
+library(GGally)
+ggpairs(heart_disease)
+
+heart_logit<-glm(HeartDisease~., data = heart_disease, family = binomial)
+summary(heart_logit)
+
+heart_logit_reduced = step(heart_logit)
+summary(heart_logit_reduced)
+
+LLR = 2 * (logLik(heart_logit) - logLik(heart_logit_reduced))
+df = heart_logit_reduced$df.residual - heart_logit$df.residual
+p_value = 1 - pchisq(LLR, df)
+cat('The loglikelihood ratio test statistic is', LLR, 'and the p-value is ', p_value)
+
+heart_logit_all_square = glm(HeartDisease~.  +I(MaxHR^2) +I(Age^2) + I(Oldpeak^2)+ I(RestingBP^2) +I(Cholesterol^2), family = binomial, data = heart_disease)
+summary(heart_logit_all_square)
+
+heart_logit_square_reduced = step(heart_logit_all_square)
+summary(heart_logit_square_reduced)
+
+LLR = 2 * (logLik(heart_logit_all_square) - logLik(heart_logit_square_reduced))
+df = heart_logit_square_reduced$df.residual - heart_logit_all_square$df.residual
+p_value = 1 - pchisq(LLR, df)
+cat('The loglikelihood ratio test statistic is', LLR, 'and the p-value is ', p_value)
+heart_logit_all_interaction = glm(HeartDisease~. +(MaxHR + Age + Oldpeak + RestingBP)^2 +I(MaxHR^2) +I(Age^2) + I(Oldpeak^2)+ I(RestingBP^2), family = binomial, data = heart_disease)
+summary(heart_logit_all_interaction)
+
+heart_logit_interaction_reduced = step(heart_logit_all_interaction)
+summary(heart_logit_interaction_reduced)
+
+heart_logit_interaction_reduced = glm(formula = HeartDisease ~ Age + Sex + ChestPainType + Cholesterol + 
+    FastingBS + MaxHR + ExerciseAngina + Oldpeak + ST_Slope + 
+    I(Oldpeak^2) + MaxHR:Oldpeak, family = binomial, data = heart_disease)
+summary(heart_logit_interaction_reduced)
+
+LLR = 2 * (logLik(heart_logit_all_interaction) - logLik(heart_logit_interaction_reduced))
+df = heart_logit_interaction_reduced$df.residual - heart_logit_all_interaction$df.residual
+p_value = 1 - pchisq(LLR, df)
+cat('The loglikelihood ratio test statistic is', LLR, 'and the p-value is ', p_value)
+
+null_model = glm(HeartDisease~ 1, data = heart_disease, family = binomial)
+
+Pse_R2 = (deviance(null_model) - deviance(heart_logit_square_reduced)) /deviance(null_model)
+cat('Pseudo-R square:', Pse_R2, '\n')
+null_model = glm(HeartDisease~ 1, data = heart_disease, family = binomial)
+
+Pse_R2 = (deviance(null_model) - deviance(heart_logit_interaction_reduced)) /deviance(null_model)
+cat('Pseudo-R square:', Pse_R2, '\n')
+
+null_model = glm(HeartDisease~ 1, data = heart_disease, family = binomial)
+
+Pse_R2 = (deviance(null_model) - deviance(heart_logit_reduced)) /deviance(null_model)
+cat('Pseudo-R square:', Pse_R2, '\n')
+
+invisible(plot(roc(heart_disease$HeartDisease,
+                   fitted(heart_logit_reduced)),
+               col = "red", 
+               main = "ROC curves:3 models",
+               legend = 'Logistic model of pure covariates'))
+
+invisible(plot(roc(heart_disease$HeartDisease,
+                   fitted(heart_logit_square_reduced)),
+               print.auc = T, 
+               col = "blue", 
+               add = T))
+invisible(plot(roc(heart_disease$HeartDisease,
+                   fitted(heart_logit_interaction_reduced)),
+               col = "yellow", 
+               add = T))
+
+#Deviance Test
+s = summary(heart_logit_square_reduced)
+dev = deviance(heart_logit_square_reduced)
+
+p_value = 1-pchisq(dev, s$df.residual)
+cat('The deviance of the model is : ', dev,'with degree freedom of ', s$df.residual, '\n')
+cat('p_value is :', p_value)
+
+s = summary(heart_logit_interaction_reduced)
+dev = deviance(s)
+
+p_value = 1-pchisq(dev, s$df.residual)
+cat('The deviance of the model is : ', dev,'with degree freedom of ', s$df.residual, '\n')
+cat('p_value is :', p_value)
+
+s = summary(heart_logit_reduced)
+dev = deviance(s)
+
+p_value = 1-pchisq(dev, s$df.residual)
+cat('The deviance of the model is : ', dev,'with degree freedom ofs ', s$df.residual, '\n')
+cat('p_value is :', p_value)
+
+library(arm)
+binnedplot(fitted(heart_logit_square_reduced), 
+        residuals(heart_logit_square_reduced, type = "response"), 
+        nclass = NULL, 
+        xlab = "Expected Values", 
+        ylab = "Average residual", 
+        main = "Binned residual plot", 
+        cex.pts = 0.8, 
+        col.pts = 1, 
+        col.int = "gray")
+
+plot(heart_logit_square_reduced)
+
+heart_logit_square_reduced$coefficients
+confint.default(heart_logit_square_reduced)
+
+\end{verbatim}
 
 
 
