@@ -1439,46 +1439,6 @@ plot2<-ggplot(data.frame(std_res_car),aes(sample=std_res_car))+
 library(gridExtra)
 grid.arrange(plot1,plot2,ncol=2)
 
-#analysis: all of the standardised residuals lies on the qqline, indicating residuals 
-#follow approximately normal distribution
-
-
-
-library(ggplot2)
-p <- ggplot(car_dat3) + aes(x =price) +
-  geom_histogram(aes(y=..density..), size=1,color="blue", fill="white", binwidth = 2000)+
-  geom_density(alpha=.05, fill="red", size = 1) +
-  ggtitle("Histogram of Price")+
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme_classic() +
-  theme(line = element_line(size = 0.5))
-
-
-
-
-p2 <- ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
-  geom_boxplot() +
-  xlab('Company') + ylab('Price')+
-  ggtitle('Car Price and Company by Fuel Type')+
-  scale_fill_manual(values=c("#CC0099", "#3399FF"),
-                    name = "Fuel Type",
-                    labels = c("Diesel", "Gas"))+
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 45,vjust = 0.5))
-
-
-
-library("dplyr")
-ordered_names <- car_dat3 %>% group_by(car_company) %>% summarize(count=n()) %>% arrange(-count)
-ordered_names <- ordered_names$car_company
-ggplot(car_dat3) + aes(x =car_company) +
-  geom_bar(size=1,color="black", fill="white")+
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits=ordered_names)+
-  theme_classic() +
-  theme(line = element_line(size = 0.5))+
-  ggtitle("Distribution of Car Company by Count")
 
 #heart disease analysis
 heart_disease<-read.csv('./heart.csv')
@@ -1602,7 +1562,7 @@ plot(heart_logit_square_reduced)
 heart_logit_square_reduced$coefficients
 confint.default(heart_logit_square_reduced)
 
-#Plot
+#explanatory analysis
 
 
 library(readr)
