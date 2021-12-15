@@ -340,7 +340,7 @@ cylindernumber+car_company+symboling+wheelbase+carlength+carwidth+carheight+curb
 
 +wheelbase^2 + carlength^2 + carwidth^2 +carheight^2 + curbweight^2 
 
-+ enginesize^2 + boreratio^2 +peakrpm^2 + citympg^2 + highwaympg^2
++enginesize^2 + boreratio^2 +peakrpm^2 + citympg^2 + highwaympg^2
 
 
 The following table shows the results of full main effect model with squared numeric terms. 
@@ -774,11 +774,11 @@ In Appendix Figure \ref{fig: oldpeak}, we can see that the patients with heart p
 
 ### Three GLM models and stepwise AIC selection
 
-To begin with, let's assign each feature with a variable name.
+To begin with, let's assign each feature with a variable name \ref{table: data_dictionary}.
 
 
 
-
+\begin{center}
 \begin{tabular}{ |p{2.3cm}|p{3cm}|p{9cm}|p{0.7cm}|  }
  \hline
  \multicolumn{4}{|c|}{Data Dictionary} \\
@@ -786,20 +786,36 @@ To begin with, let's assign each feature with a variable name.
  Variable Name & Definition & Explanation & Vari- able name\\
  \hline
     Age   &   age of the patient    &   years   &   $x_1$   \\ 
+    \hline
    Sex   &   sex of the patient   &   M: Male, F: Female   &   $x_2$   \\ 
+   \hline
    ChestPainType   &   chest pain type   &   TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic   &   $x_3$   \\ 
+   \hline
    RestingBP   &   resting blood pressure    &   mm Hg   &   $x_4$   \\ 
+  \hline 
    Cholesterol   &   serum cholesterol   &   1: if FastingBS > 120 mg/dl, 0: otherwise   &   $x_5$   \\ 
-   FastingBS   &   fasting blood sugar   &   Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria   &   $x_6$   \\ 
-   RestingECG   &   resting electrocardiogram results   &   Numeric value between 60 and 202   &   $x_7$   \\ 
-   MaxHR   &   maximum heart rate achieved   &   Y: Yes, N: No   &   $x_8$   \\ 
-   ExerciseAngina   &    exercise-induced angina    &   Numeric value measured in depression   &   $x_9$   \\ 
+   \hline
+   FastingBS   &   fasting blood sugar   &  fasting blood sugar [1: if FastingBS > 120 mg/dl, 0: otherwise]  &   $x_6$   \\ 
+  \hline 
+   RestingECG   &   resting electrocardiogram results   &  Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria    &   $x_7$   \\ 
+   \hline
+   MaxHR   &   maximum heart rate achieved   &   Numeric value between 60 and 202     &   $x_8$   \\ 
+   \hline
+   ExerciseAngina   &    exercise-induced angina    &   Y: Yes, N: No    &   $x_9$   \\ 
+   \hline
    Oldpeak   &   oldpeak = ST    &   Numeric value measured in depression   &   $x_{10}$   \\ 
+   \hline
    ST\_Slope   &   the slope of the peak exercise ST segment    &   Up: upsloping, Flat: flat, Down: downsloping   &   $x_{11}$   \\ 
+   \hline
    HeartDisease   &   output class   &   1: heart disease, 0: Normal   &   $y$   \\ 
-
  \hline
- \end{tabular}
+\end{tabular}
+\end{center}
+
+\begin{center}
+Table 2.1: \emph{Data Dictionary}
+\label{table: data_dictionary}
+\end{center}
  
 #### Modeling All the Main Covariates
  
@@ -809,7 +825,7 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
 $$
 where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
-So we fitted the model, and got the estimated parameters shown in the table below. 
+So we fitted the model, and got the estimated parameters shown in the table \ref{table: full_effect}. 
 
 
 \begin{center}
@@ -822,22 +838,30 @@ Age & 0.0166 & 0.21 & not significant\\
 SexM & 1.47 & 1.6e-07 & ***\\ 
 ChestPainTypeATA & -1.83 & 2.03e-08 & ***\\ 
 ChestPainTypeNAP & -1.69 & 2.34e-10 & ***\\ 
-ChestPainTypeTA & -1.49 & 0.00058 & *\\ 
+ChestPainTypeTA & -1.49 & 0.00058 & **\\ 
 RestingBP & 0.00419 & 0.485 & not significant\\ 
-Cholesterol & -0.00411 & 0.000154 & *\\ 
-FastingBS & 1.14 & 3.59e-05 & **\\ 
+Cholesterol & -0.00411 & 0.000154 & **\\ 
+FastingBS & 1.14 & 3.59e-05 & ***\\ 
 RestingECGNormal & -0.177 & 0.515 & not significant\\ 
 RestingECGST & -0.269 & 0.443 & not significant\\ 
 MaxHR & -0.00429 & 0.393 & not significant\\ 
-ExerciseAnginaY & 0.9 & 0.000231 & *\\ 
-Oldpeak & 0.381 & 0.00131 & .\\ 
-ST\_SlopeFlat & 1.45 & 0.000703 & *\\ 
+ExerciseAnginaY & 0.9 & 0.000231 & **\\ 
+Oldpeak & 0.381 & 0.00131 & *\\ 
+ST\_SlopeFlat & 1.45 & 0.000703 & ** \\ 
 ST\_SlopeUp & -0.994 & 0.0272 & .\\
  \hline
  \end{tabular} 
 \end{center}
+
+\begin{center}
+Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+
+Table 2.2: \emph{Estimation and Significance of Full Effect Model}
+\label{table: full_effect}
+\end{center}
+
 As we can see from the table, there are some variables that are not significant. We should drop some variables to make the model simpler. We choose backward step selection to do so. 
-And we get our estimated paraeters shown in the table below.
+And we get our estimated parameters shown in the table \ref{table: reduced_effect}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -849,16 +873,22 @@ Age & 0.0231 & 0.0518 & not significant\\
 SexM & 1.47 & 1.36e-07 & ***\\ 
 ChestPainTypeATA & -1.86 & 8.89e-09 & ***\\ 
 ChestPainTypeNAP & -1.72 & 6.13e-11 & ***\\ 
-ChestPainTypeTA & -1.49 & 0.000494 & *\\ 
-Cholesterol & -0.00398 & 0.000106 & *\\ 
-FastingBS & 1.13 & 3.41e-05 & **\\ 
-ExerciseAnginaY & 0.936 & 8.21e-05 & **\\ 
-Oldpeak & 0.377 & 0.00121 & .\\ 
-ST\_SlopeFlat & 1.46 & 0.000654 & *\\ 
+ChestPainTypeTA & -1.49 & 0.000494 & **\\ 
+Cholesterol & -0.00398 & 0.000106 & **\\ 
+FastingBS & 1.13 & 3.41e-05 & ***\\ 
+ExerciseAnginaY & 0.936 & 8.21e-05 & ***\\ 
+Oldpeak & 0.377 & 0.00121 & *\\ 
+ST\_SlopeFlat & 1.46 & 0.000654 & **\\ 
 ST\_SlopeUp & -1.03 & 0.0211 & .\\
  \hline
  \end{tabular} 
+ 
+Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+
+Table 2.3: \emph{Estimation and Significance of Reduced Effect Model}
+\label{table: reduced_effect}
 \end{center}
+
  
 From the table, we can see all the variables are significant now.  here is the **model 1** formula.
 
@@ -893,39 +923,43 @@ Now we investigated the square of the numerical variables. We did this approach 
 $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \beta_{12}x_1 ^2 + \beta_{42}x_4^2 + \beta_{72}x_7^2 + \beta_{102}x_{10}^2
 $$
-The model is fitted by R. And all the parameters and significance of them are demonstrated in the table below.
+The model is fitted by R. And all the parameters and significance of them are demonstrated in the table \ref{table: squared}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
   & Estimate & Pr(>|z|) & significance\\
 \hline
-(Intercept) & 3.34e+00 & 4.96e-01 & not significant\\
-Age & -2.90e-02 & 7.86e-01 & not significant\\
-SexM & 1.49e+00 & 2.00e-07 & ***\\
-ChestPainTypeATA & -1.71e+00 & 2.00e-07 & ***\\
-ChestPainTypeNAP & -1.68e+00 & 0.00e+00 & ***\\
-ChestPainTypeTA & -1.38e+00 & 2.31e-03 & .\\
-RestingBP & -2.86e-02 & 5.47e-01 & not significant\\
-Cholesterol & -1.16e-02 & 2.87e-05 & **\\
-FastingBS & 1.08e+00 & 1.73e-04 & *\\
-RestingECGNormal & -1.65e-01 & 5.53e-01 & not significant\\
-RestingECGST & -2.96e-01 & 4.10e-01 & not significant\\
-MaxHR & -2.29e-02 & 5.81e-01 & not significant\\
-ExerciseAnginaY & 1.08e+00 & 2.09e-05 & **\\
-Oldpeak & -3.04e-01 & 3.33e-01 & not significant\\
-ST\_SlopeFlat & 1.77e+00 & 1.12e-04 & *\\
+Age & -0.029 & 0.786 & not significant\\ 
+SexM & 1.49 & 2.28e-07 & ***\\ 
+ChestPainTypeATA & -1.71 & 2.21e-07 & ***\\ 
+ChestPainTypeNAP & -1.68 & 8.06e-10 & ***\\ 
+ChestPainTypeTA & -1.38 & 0.00231 & *\\ 
+RestingBP & -0.0286 & 0.547 & not significant\\ 
+Cholesterol & -0.0116 & 2.87e-05 & ***\\ 
+FastingBS & 1.08 & 0.000173 & **\\ 
+RestingECGNormal & -0.165 & 0.553 & not significant\\ 
+RestingECGST & -0.296 & 0.41 & not significant\\ 
+MaxHR & -0.0229 & 0.581 & not significant\\ 
+ExerciseAnginaY & 1.08 & 2.09e-05 & ***\\ 
+Oldpeak & -0.304 & 0.333 & not significant\\
+ST\_SlopeFlat & 1.77 & 0.000112 & ** \\ 
 ST\_SlopeUp & -7.29e-01 & 1.26e-01 & not significant\\
 I(MaxHR\textasciicircum{}2) & 7.45e-05 & 6.24e-01 & not significant\\
 I(Age\textasciicircum{}2) & 4.72e-04 & 6.37e-01 & not significant\\
 I(Oldpeak\textasciicircum{}2) & 2.67e-01 & 1.96e-02 & .\\
 I(RestingBP\textasciicircum{}2) & 1.20e-04 & 4.95e-01 & not significant\\
-I(Cholesterol\textasciicircum{}2) & 2.17e-05 & 2.22e-03 & .\\
+I(Cholesterol\textasciicircum{}2) & 2.17e-05 & 2.22e-03 & *\\
 \hline
 \end{tabular}
+
+Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+
+Table 2.4: \emph{Estimation and Significance of Squared Model}
+\label{table: squared}
 \end{center}
 
-But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical model. The parameters and their significance of selected model are shown in the table.
+But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical model. The parameters and their significance of selected model are shown in the table \ref{table: reduced_squared}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -936,17 +970,23 @@ But there are still some useless covariates in the model. To simplify the model,
 SexM & 1.50e+00 & 1.00e-07 & ***\\
 ChestPainTypeATA & -1.72e+00 & 1.00e-07 & ***\\
 ChestPainTypeNAP & -1.68e+00 & 0.00e+00 & ***\\
-ChestPainTypeTA & -1.37e+00 & 1.98e-03 & .\\
+ChestPainTypeTA & -1.37e+00 & 1.98e-03 & *\\
 Cholesterol & -1.18e-02 & 9.90e-06 & ***\\
-FastingBS & 1.05e+00 & 2.10e-04 & *\\
-ExerciseAnginaY & 1.02e+00 & 1.92e-05 & **\\
-ST\_SlopeFlat & 1.74e+00 & 1.20e-04 & *\\
+FastingBS & 1.05e+00 & 2.10e-04 & ** \\
+ExerciseAnginaY & 1.02e+00 & 1.92e-05 & ***\\
+ST\_SlopeFlat & 1.74e+00 & 1.20e-04 & ** \\
 ST\_SlopeUp & -7.23e-01 & 1.22e-01 & not significant\\
 I(Age\textasciicircum{}2) & 2.22e-04 & 4.77e-02 & .\\
-I(Oldpeak\textasciicircum{}2) & 1.70e-01 & 2.21e-04 & *\\
-I(Cholesterol\textasciicircum{}2) & 2.24e-05 & 1.44e-03 & .\\
+I(Oldpeak\textasciicircum{}2) & 1.70e-01 & 2.21e-04 & **\\
+I(Cholesterol\textasciicircum{}2) & 2.24e-05 & 1.44e-03 & *\\
 \hline
 \end{tabular}
+
+
+Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+
+Table 2.5: \emph{Estimation and Significance of Reduced Squared Model}
+\label{table: reduced_squared}
 \end{center}
 
 We now apply Log-likelihood ratio test to get
@@ -971,30 +1011,37 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \sum_{i \in \mathcal{N}}
 \beta_{i2}x_i ^2 + \sum_{i \in \mathcal{N}}\sum_{j \in \mathcal{N}}\beta_{ij}x_i x_j
 $$
-where $\mathcal N = \{1, 4, 7, 10\}$, which means the set of numerical variables. We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table below 
+where $\mathcal N = \{1, 4, 7, 10\}$, which means the set of numerical variables. We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table \ref{table: reduced_interaction} 
 
 \begin{center}
+\title{}
 \begin{tabular}{|l|c|c|c|}
 \hline
   & Estimate & Pr(>|z|) & significance\\
   \hline
-(Intercept) & -1.950000 & 1.29e-01 & not significant\\
-Age & 0.021300 & 9.17e-02 & not significant\\
-SexM & 1.420000 & 4.00e-07 & ***\\
-ChestPainTypeATA & -1.810000 & 0.00e+00 & ***\\
-ChestPainTypeNAP & -1.660000 & 0.00e+00 & ***\\
-ChestPainTypeTA & -1.450000 & 9.97e-04 & *\\
-Cholesterol & -0.003860 & 2.71e-04 & *\\
-FastingBS & 1.200000 & 1.44e-05 & **\\
-MaxHR & 0.000751 & 8.97e-01 & not significant\\
-ExerciseAnginaY & 0.993000 & 6.60e-05 & **\\
-Oldpeak & 0.668000 & 3.73e-01 & not significant\\
-ST\_SlopeFlat & 1.810000 & 7.59e-05 & **\\
+(Intercept) & -1.95 & 0.129 & not significant\\ 
+Age & 0.0213 & 0.0917 & .\\ 
+SexM & 1.42 & 4.16e-07 & ***\\ 
+ChestPainTypeATA & -1.81 & 2.24e-08 & ***\\ 
+ChestPainTypeNAP & -1.66 & 6.4e-10 & ***\\ 
+ChestPainTypeTA & -1.45 & 0.000997 & ***\\ 
+Cholesterol & -0.00386 & 0.000271 & ***\\ 
+FastingBS & 1.2 & 1.44e-05 & ***\\ 
+MaxHR & 0.000751 & 0.897 & not significant\\ 
+ExerciseAnginaY & 0.993 & 6.6e-05 & ***\\ 
+Oldpeak & 0.668 & 0.373 & not significant\\ 
+ST\_SlopeFlat & 1.810000 & 7.59e-05 & ***\\
 ST\_SlopeUp & -0.732000 & 1.20e-01 & not significant\\
-I(Oldpeak\textasciicircum{}2) & 0.324000 & 6.27e-03 & .\\
+I(Oldpeak\textasciicircum{}2) & 0.324000 & 6.27e-03 & ** \\
 MaxHR:Oldpeak & -0.007750 & 1.42e-01 & not significant\\
 \hline
 \end{tabular}
+
+
+Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+
+Table 2.6: \emph{Estimation and Significance of Reduced Interaction Model}
+\label{table: reduced_interaction}
 \end{center}
 
 Similarly, we did a Log-likelihood ratio test to the reduction, and get
@@ -1078,6 +1125,43 @@ The binned residual of model 2 is shown in following graph\ref{fig: Binned 2}, t
 
 
 ## Conclusion
+
+The best model to predict heart disease is model 2, which contains SexM, ChestPainTypeATA ChestPainTypeNAP, ChestPainTypeTA, Cholesterol, FastingBS, ExerciseAnginaY, ST\_slopeFlat, ST\_slopeUp, Age^2, Oldpeak ^2, Cholesterol ^2. The formula of the model 2 is displayed below.
+
+$$
+\begin{aligned}
+\log \frac{\hat p}{1-\hat p} = & -1.1  + 1.5 \text{SexM} \\
+& -1.7 \text{ChestPainTypeATA}- 1.7 \text{ChestPainTypeNAP} - 1.4 \text{ChestPainTypeTA} \\
+& - 0.0012 \text{Cholesterol}\\
+&+ 1.0 \text{FastingBS} + 1.0 \text{ExerciseAnginaY} \\
+&+ 1.7 \text{ST\_slopeFlat} - 7.2 \text{ST\_slopeUp} \\
+& + 2.2 \times 10^{-4} \text{Age}^2 + 1.7 \text{Oldpeak} ^2 + 2.2 \times 10^{-5} \text{Cholesterol} ^2
+\end{aligned}
+$$
+
+We can have some insights about these parameters. 
+
+(1) The odds ratio of having a heart disease for males compared to females is 4.5, with a 95% confidence interval (2.6,7.8), which means male has a higher risk to get heart disease than female.
+
+
+(2) The odds ratio of having heart disease for someone with exercise induced Angina compared to someone without is 2.8, with a 95% confidence interval (1.7,4.4). This fact indicates that exercise induced angina is an indication of heart disease.
+
+
+(3) Someone with chest pain type of non-anginal pain, typical angina and atypical angina is less likely having heart disease comparing to someone with asymptomatic chest pain type.
+
+(4) The odds ratio of having a heart disease is positively related to the fasting blood sugar.  The odds ratio will increase by one when the sugar levels increase by one unit.
+
+(5) If the slope of the peak exercise ST segment is up-sloping, it is least likely to have a heart disease, followed by down-sloping. Flat slope is most related to having a heart disease.
+
+(6) The log-odds of having heart disease is quadratic related to Cholesterol level. If Cholesterol  level is less than 27.2, then the log odds ratio of having heart disease is negatively related to it. Otherwise, it is positively related. This result indicates that either too high or too low of cholesterol level may related to heart disease.
+
+(7) The odds ratio of having a heart disease is positively related to the quadratic of age.  The odds ratio will increase by $2.2 \times 10^{-4}$ when the squared age increase by one unit.
+
+
+There are still some limitations in our model. In the parameter interpretation (3), someone with asymptomatic chest pain type is the least likely to have a heart disease, which is counter intuitive. How come someone without chest pain is even less likely to have a heart disease than those with chest pain? This should be further investigated.   
+
+
+
 
 
 \pagebreak
