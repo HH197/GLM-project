@@ -238,7 +238,7 @@ highwaympg & 0.01 & 0.19 & not significant\\
 
 
 \begin{center}
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 \end{center}
 
 \begin{center}
@@ -329,7 +329,7 @@ highwaympg & 0.01 & 0.09 & .\\
 \end{center}
 
 \begin{center}
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 \end{center}
 
 \begin{center}
@@ -431,7 +431,7 @@ I(highwaympg\textasciicircum{}2) & 1.25e-04 & 0.81 & not significant\\
 \end{center}
 
 \begin{center}
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 \end{center}
 
 \begin{center}
@@ -513,7 +513,7 @@ I(highwaympg\textasciicircum{}2) & 1.84e-04 & 0.06 & .\\
  \end{center}
 
 \begin{center}
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 \end{center}
 
 \begin{center}
@@ -862,7 +862,7 @@ ST\_SlopeUp & -0.994 & 0.0272 & .\\
 \end{center}
 
 \begin{center}
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 
 Table 2.2: \emph{Estimation and Significance of Full Effect Model}
 \label{table: full_effect}
@@ -891,7 +891,7 @@ ST\_SlopeUp & -1.03 & 0.0211 & .\\
  \hline
  \end{tabular} 
  
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 
 Table 2.3: \emph{Estimation and Significance of Reduced Effect Model}
 \label{table: reduced_effect}
@@ -961,7 +961,7 @@ I(Cholesterol\textasciicircum{}2) & 2.17e-05 & 2.22e-03 & *\\
 \hline
 \end{tabular}
 
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 
 Table 2.4: \emph{Estimation and Significance of Squared Model}
 \label{table: squared}
@@ -991,7 +991,7 @@ I(Cholesterol\textasciicircum{}2) & 2.24e-05 & 1.44e-03 & *\\
 \end{tabular}
 
 
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming '***' strong '**' moderate '*' boderline '.'
 
 Table 2.5: \emph{Estimation and Significance of Reduced Squared Model}
 \label{table: reduced_squared}
@@ -1046,7 +1046,7 @@ MaxHR:Oldpeak & -0.007750 & 1.42e-01 & not significant\\
 \end{tabular}
 
 
-Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
+Signif.codes: overwhelming *** strong ** moderate * borderline .
 
 Table 2.6: \emph{Estimation and Significance of Reduced Interaction Model}
 \label{table: reduced_interaction}
