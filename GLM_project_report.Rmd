@@ -2,7 +2,7 @@
 title: "| \\vspace{5cm} \\Huge Car Price Prediction \n\n| and \n\n| \\ \\Huge Heart
   Disease Classification\n"
 author: |
-  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Htet Chan Nyein (ID:90150020), and Yanzhao Qian
+  | \vspace{0.5cm} \LARGE Hamid Hamidi, Thet Htet Chan Nyein, and Yanzhao Qian
   | \small Authors are in alphabetic order and have equal contribution.
 
 
@@ -782,7 +782,7 @@ In Appendix Figure \ref{fig: oldpeak}, we can see that the patients with heart p
 
 ### 2.3.1 Three GLM models and stepwise AIC selection
 
-To begin with, let's assign each feature with a variable name \ref{table: data_dictionary}.
+To begin with, we assigned each feature with a variable name \ref{table: data_dictionary}.
 
 
 
@@ -827,13 +827,13 @@ Table 2.1: \emph{Data Dictionary}
  
 #### Modeling All the Main Covariates
  
- Since the response is having heart disease or not, it is a binomial distributed response. So it is suggested we could use a logistic regression model.
+ Since the response is having heart disease or not, it is a binomially distributed response. So it is suggested we could use a logistic regression model.
  At first, we created a logistic model of all the main effects, and the formula of the model is
 $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
 $$
 where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
-So we fitted the model, and got the estimated parameters shown in the table \ref{table: full_effect}. 
+So we fitted the model, and got the estimated parameters shown in the table\ref{table: full_effect}. 
 
 
 \begin{center}
@@ -967,7 +967,7 @@ Table 2.4: \emph{Estimation and Significance of Squared Model}
 \label{table: squared}
 \end{center}
 
-But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical model. The parameters and their significance of selected model are shown in the table \ref{table: reduced_squared}.
+But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical variables. The parameters and their significance of selected model are shown in the table \ref{table: reduced_squared}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -1013,7 +1013,7 @@ $$
 \end{aligned}
 $$
 
-#### Modeling the Interaction of Numerical
+#### Modeling the Interaction of Numerical Variables
 We also modeled the interaction between numerical terms, and the model is 
 $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \sum_{i \in \mathcal{N}}
@@ -1073,7 +1073,7 @@ $$
 
 #### Receiver operating characteristics (ROC) 
 graphs are useful for organizing classifiers and visualizing their performance @ROC. 
-ROC curves demonstrate true positive rate on the Y axis and false positive rate on the X axis with different decision criterion. If the ROC curve can reach left-up corner in the graph, false positive rate reach zero and true positive rate of 1, which means the model has an perfect classification @scikit.  Therefore, the more for CROC curve lean to the right-up corner, the better performance of the model has. The ROC curves for three models are shown in the plot\ref{fig: roc_curve}.
+ROC curves demonstrate true positive rate on the Y axis and false positive rate on the X axis with different decision criterion. If the ROC curve can reach left-up corner in the graph, false positive rate reach zero and true positive rate of 1, which means the model has an perfect classification @scikit.  Therefore, the more for CROC curve lean to the right-up corner, the better performance of the model has. The ROC curves for three models are shown in the figure \ref{fig: roc_curve}.
 
 
 \begin{figure}[h]
@@ -1120,7 +1120,7 @@ Residual plots, residual-versus-fitted values, is commonly used in linear regres
 To construct a binned residual plot, Data are split into bins containing equal numbers of observations, and the average residual is plotted against the average predicted probability for each bin. For each bin,
 approximate 95% confidence limits are $\pm 2 \sqrt{p(1-p)/n}$, estimated by using standard deviation of residuals in each bin. If a model is good, most(95%) of the points are expected to lie between two confidence limits @kasza2015stata. 
 
-The binned residual of model 2 is shown in following graph\ref{fig: Binned 2}, the plots for other two models are shown in the appendix. Thus, We can conclude that three models are good, since most of the residuals lie within the confidence limits.
+The binned residual of model 2 is shown in following figure \ref{fig: Binned 2}, the plots for other two models are shown in the appendix. Thus, We can conclude that three models are good, since most of the residuals lie within the confidence limits.
 
 \begin{figure}[h]
     \centering
@@ -1134,7 +1134,7 @@ The binned residual of model 2 is shown in following graph\ref{fig: Binned 2}, t
 
 ## 2.4 Conclusion
 
-The best model to predict heart disease is model 2, which contains SexM, ChestPainTypeATA ChestPainTypeNAP, ChestPainTypeTA, Cholesterol, FastingBS, ExerciseAnginaY, ST\_slopeFlat, ST\_slopeUp, Age^2, Oldpeak ^2, Cholesterol ^2. The formula of the model 2 is displayed below.
+The best model to predict heart disease is model 2, which contains SexM, ChestPainTypeATA ChestPainTypeNAP, ChestPainTypeTA, Cholesterol, FastingBS, ExerciseAnginaY, ST\_slopeFlat, ST\_slopeUp, Age^2, Oldpeak ^2, Cholesterol ^2. The formula of model 2 is displayed below.
 
 $$
 \begin{aligned}
@@ -1147,26 +1147,26 @@ $$
 \end{aligned}
 $$
 
-We can have some insights about these parameters. 
+We can have some insights into these parameters. 
 
-(1) The odds ratio of having a heart disease for males compared to females is 4.5, with a 95% confidence interval (2.6,7.8), which means male has a higher risk to get heart disease than female.
-
-
-(2) The odds ratio of having heart disease for someone with exercise induced Angina compared to someone without is 2.8, with a 95% confidence interval (1.7,4.4). This fact indicates that exercise induced angina is an indication of heart disease.
+(1) The odds ratio of having heart disease for males compared to females is 4.5, with a 95% confidence interval (2.6,7.8), which means male has a higher risk to get heart disease than female.
 
 
-(3) Someone with chest pain type of non-anginal pain, typical angina and atypical angina is less likely having heart disease comparing to someone with asymptomatic chest pain type.
-
-(4) The odds ratio of having a heart disease is positively related to the fasting blood sugar.  The odds ratio will increase by one when the sugar levels increase by one unit.
-
-(5) If the slope of the peak exercise ST segment is up-sloping, it is least likely to have a heart disease, followed by down-sloping. Flat slope is most related to having a heart disease.
-
-(6) The log-odds of having heart disease is quadratic related to Cholesterol level. If Cholesterol  level is less than 27.2, then the log odds ratio of having heart disease is negatively related to it. Otherwise, it is positively related. This result indicates that either too high or too low of cholesterol level may related to heart disease.
-
-(7) The odds ratio of having a heart disease is positively related to the quadratic of age.  The odds ratio will increase by $2.2 \times 10^{-4}$ when the squared age increase by one unit.
+(2) The odds ratio of having heart disease for someone with exercise-induced Angina compared to someone without is 2.8, with a 95% confidence interval (1.7,4.4). This fact indicates that exercise-induced angina is an indication of heart disease.
 
 
-There are still some limitations in our model. In the parameter interpretation (3), someone with asymptomatic chest pain type is the least likely to have a heart disease, which is counter intuitive. How come someone without chest pain is even less likely to have a heart disease than those with chest pain? This should be further investigated.   
+(3) Someone with chest pain type of non-anginal pain, typical angina, and atypical angina is less likely having heart disease compared to someone with asymptomatic chest pain type.
+
+(4) The odds ratio of having heart disease is positively related to the fasting blood sugar. The odds ratio will increase by 2.85 when the sugar levels increase by one unit, with 95% confidence interval of (1.64,  4.97).
+
+(5) If the slope of the peak exercise ST segment is up-sloping, it is least likely to have heart disease, followed by down-sloping. A flat slope is most related to having heart disease.
+
+(6) The log-odds of having heart disease is quadratic related to Cholesterol level. If the Cholesterol level is less than 27.2, then the log odds ratio of having heart disease is negatively related to it. Otherwise, it is positively related. This result indicates that either too high or too low of cholesterol level may be related to heart disease.
+
+(7) The odds ratio of having heart disease is positively related to the quadratic of age.  The odds ratio will increase by $2.2 \times 10^{-4}$ when the squared age increase by one unit.
+
+
+There are still some limitations in our analysis. In parameter interpretation (3), someone with an asymptomatic chest pain type is the least likely to have heart disease, which is counterintuitive. How come someone without chest pain is even less likely to have heart disease than those with chest pain? This should be further investigated.   
 
 
 
@@ -1601,6 +1601,209 @@ plot(heart_logit_square_reduced)
 
 heart_logit_square_reduced$coefficients
 confint.default(heart_logit_square_reduced)
+
+#Plot
+
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+##### Car price ###### 
+car_dat <- read_csv("C:/Users/Hamid/Desktop/price_data/CarPrice_Assignment.csv")
+test_string<-toString(car_dat$CarName[1])
+strsplit(test_string,"-")
+test_string2<-toString(car_dat$CarName[4])
+test_vec<-c(strsplit(test_string2," "))
+test_car_comp<-c(rep(NA,nrow(car_dat)))
+test_car_list<-vector(mode = "list", length = nrow(car_dat))
+for(i in 1:nrow(car_dat)){
+  test_string<-toString(car_dat$CarName[i])
+  test_car_list[[i]]<-c(strsplit(test_string," "))
+  test_car_pre<-unlist(test_car_list[[i]][1])
+  test_car_comp[i]<-test_car_pre[1]
+}
+#change the typo
+car_comp_final<-c(rep(NA,nrow(car_dat)))
+for(i in 1:nrow(car_dat)){
+  if(test_car_comp[i]=="maxda"){
+    car_comp_final[i]<-"mazda"
+  }
+  else if(test_car_comp[i]=="Nissan"){
+    car_comp_final[i]<-"nissan"
+  }
+  else if(test_car_comp[i]=="porcshce"){
+    car_comp_final[i]<-"toyota"
+  }
+  else if(test_car_comp[i]=="vokswagen"){
+    car_comp_final[i]<-"volkswagen"
+  }
+  else if(test_car_comp[i]=="vw"){
+    car_comp_final[i]<-"volkswagen"
+  }
+  else if(test_car_comp[i]=="toyouta"){
+    car_comp_final[i]<-"toyota"
+  }
+  else{
+    car_comp_final[i]<-test_car_comp[i]
+  }
+}
+firstup <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+car_comp_final<-firstup(car_comp_final)
+car_dat$car_company<-car_comp_final
+hist(car_dat$price)
+#can use exponential regression or log linear model
+#remove the car id and car name because they are not useful in analysis
+#car name overlaps with car company variables
+car_dat2<-car_dat[,-c(1,3)]
+#extract character variables
+character_var<-car_dat2[, sapply(car_dat2, class) == 'character']
+character_var[sapply(character_var, is.character)] <- lapply(character_var[sapply(character_var, is.character)],
+                                                             as.factor)
+#extract non-character variables
+no_chara<-car_dat2[, sapply(car_dat2, class) != 'character']
+#summary(no_chara)
+car_dat3<-cbind(character_var,no_chara)
+#exponential model
+expo_model_price<-glm(price~., data= car_dat3[, -c(6,7,9)],family= Gamma(link = "log"))
+(sum_mod_expo<-summary(expo_model_price,dispersion=1))
+
+
+
+##distribution plots
+p1 <- ggplot(car_dat3) + aes(x =price) + 
+  geom_histogram(aes(y=..density..), size=1,color="blue", fill="white", binwidth = 2000)+ 
+  geom_density(alpha=.05, fill="red", size = 1) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_classic() +
+  theme(line = element_line(size = 0.5)) 
+
+p2 <- ggplot(car_dat3) + aes(x = log(price)) + 
+  geom_histogram(aes(y=..density..), size=1,color="blue", fill="white")+ 
+  geom_density(alpha=.05, fill="red", size = 1) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_classic() +
+  theme(line = element_line(size = 0.5)) 
+
+p <- 
+  ggpubr::ggarrange(p1, p2, 
+                  labels = c("A", "B"),
+                  ncol = 1, nrow = 2)
+
+##Box plots
+p <- 
+  ggplot(car_dat3, aes(x=car_company, y=price, fill=fueltype)) +
+  geom_boxplot(lwd=0.25) + 
+  xlab('Company') + ylab('Price')+
+  scale_fill_manual(values=c("#cc0099", "#3399ff"), 
+                    name = "Fuel Type", 
+                    labels = c("Diesel", "Gas"))+
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 45,vjust = 0.5))
+
+ggsave('C:/Users/Hamid/Desktop/car_company.pdf', p, width = 8, height = 5)
+
+
+car_dat3$cylindernumber <- factor(car_dat3$cylindernumber, levels=c('two', 'three', 'four', 'five',  'six', 'eight', 'twelve'),
+                                  labels=c('Two', 'Three', 'Four', 'Five',  'Six', 'Eight', 'Twelve'))
+
+p<- 
+  ggplot(car_dat3) +
+  aes(x = enginesize, y = price, color = cylindernumber) +
+  geom_point(color = "black") +
+  geom_smooth(method = "lm", alpha = 0.2) + 
+  xlab('Engine size') + ylab('Price')+
+  scale_colour_brewer(palette = "Set1", name = "Cylinder Number")+
+  theme_classic()
+
+
+res <- car_dat3 %>% mutate(category=cut(wheelbase, breaks=4, labels=c("1","2","3", "4")))
+
+p <- 
+  ggplot(res) +
+  aes(x = category, y = price) +
+  geom_boxplot(color = "#3399ff") + stat_summary(fun=median, geom="line", aes(group=1), color = "#cc0099")  + 
+  stat_summary(fun=median, geom="point", color = "#cc0099")+ #ggtitle('The square effect of wheel base on price')+
+  xlab('Wheel base groups') + ylab('Price')+
+  theme_classic()
+
+
+##### Heart disease ###### 
+
+heart_disease <- read_csv("C:/Users/Hamid/Desktop/heart.csv")
+
+heart_disease$HeartDisease <- factor(heart_disease$HeartDisease, levels = c(0, 1), labels = c('No', 'Yes'))
+heart_disease$Sex <- factor(heart_disease$Sex, levels = c('F', 'M'), labels = c('Female', 'Male'))
+
+
+
+df <- heart_disease %>% group_by(HeartDisease, ChestPainType, Sex) %>% count()
+p_chest_pain <- 
+  ggplot(df, aes(y = n, x=ChestPainType, fill=HeartDisease)) + facet_grid(.~Sex)+
+  geom_bar(stat = 'identity') +
+  xlab('Chest pain type') + ylab('Count')+
+  scale_fill_manual(values=c("#3399ff", "#cc0099"), 
+                    name = "Heart Disease")+
+  theme_classic() + 
+  theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+
+
+p<- 
+  ggplot(heart_disease, aes(x=Age, fill = HeartDisease))+ facet_grid(.~Sex)+
+  geom_bar() +
+  xlab('Age') + ylab('Count')+
+  scale_fill_manual(values=c("#3399ff", "#cc0099"), 
+                    name = "Heart Disease")+
+  theme_classic() + 
+  theme(line = element_line(size = 0.5), strip.background = element_blank(), strip.text = element_text(size = 12), 
+        legend.title = element_text(size=8), legend.text = element_text(size = 6)) + 
+  guides(color = guide_legend(override.aes = list(size = 0.2)))
+
+
+##Box plot cholesterol
+
+p <- ggplot(heart_disease, aes(y = Cholesterol, x=HeartDisease))+
+  geom_boxplot(colour = "#cc0099") +
+  xlab('Heart Disease') + ylab('Cholesterol')+
+  scale_fill_manual(values=c("#3399ff", "#cc0099"), 
+                    name = "Heart Disease")+
+  theme_classic() + 
+  theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+
+
+###exercise
+
+df <- heart_disease %>% group_by(HeartDisease, ExerciseAngina, Sex) %>% count()
+ex_ang_plot <- 
+  ggplot(df, aes(y = n, x=ExerciseAngina, fill=HeartDisease)) + facet_grid(.~Sex)+
+  geom_bar(stat = 'identity') +
+  xlab('Exercise Angina') + ylab('Count')+
+  scale_fill_manual(values=c("#3399ff", "#cc0099"), 
+                    name = "Heart Disease")+
+  theme_classic() + 
+  theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+
+
+p <-
+  ggpubr::ggarrange(p_chest_pain, ex_ang_plot, 
+                  labels = c("A", "B"),
+                  ncol = 1, nrow = 2)
+
+
+
+p <- 
+  ggplot(heart_disease, aes(y = Oldpeak, x=HeartDisease))+
+  geom_boxplot(colour = "#cc0099") +
+  xlab('Heart Failure') + ylab('Oldpeak')+
+  theme_classic() + 
+  theme(strip.background = element_blank(), strip.text = element_text(size = 12))
+
+
 
 \end{verbatim}
 
