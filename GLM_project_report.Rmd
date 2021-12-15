@@ -245,7 +245,15 @@ Signif.codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 'not significant' 1
 Table 1.2: \emph{Full Main Effect Model results}
 \end{center}
 
-From Table 1.2, we can see that some covariates are insignificant. Hence, we conducted stepwise selection with both forward and backward direction and AIC as  selection criteria @stepAIC. From the AIC stepwise selection, we obtained the stepwise model for main effects. 
+From Table 1.2, we can see that some covariates are insignificant. Hence, we conducted stepwise selection with both forward and backward direction and AIC as  selection criteria @stepAIC. AIC or Akaike information criterion is a popular method for variable selction for model building. 
+
+For choosing a model from a sequence of model candidates $M_i$, $i = 1,2,\dots K$. The AIC is defined as
+$$
+\text{AIC}_i = -2 \log L_i + 2 V_i
+$$
+
+
+From the AIC stepwise selection, we obtained the stepwise model for main effects. 
 
 The formula for stepwise main effect is as follows:
 
