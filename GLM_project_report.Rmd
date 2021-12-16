@@ -833,7 +833,7 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i
 $$
 where $p$ is the probability to get the heart disease, and $\beta_i, i = 1,2, \dots, 11$ is the coefficients of the parameter, $\beta_0$ is the intercept. 
-So we fitted the model, and got the estimated parameters shown in the table\ref{table: full_effect}. 
+So we fitted the model, and got the estimated parameters shown in the table below\ref{table: full_effect}. 
 
 
 \begin{center}
@@ -869,7 +869,7 @@ Table 2.2: \emph{Estimation and Significance of Full Effect Model}
 \end{center}
 
 As we can see from the table, there are some variables that are not significant. We should drop some variables to make the model simpler. We choose backward step selection to do so. 
-And we get our estimated parameters shown in the table \ref{table: reduced_effect}.
+And we get our estimated parameters shown in the table below \ref{table: reduced_effect}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -931,7 +931,7 @@ Now we investigated the square of the numerical variables. We did this approach 
 $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \beta_{12}x_1 ^2 + \beta_{42}x_4^2 + \beta_{72}x_7^2 + \beta_{102}x_{10}^2
 $$
-The model is fitted by R. And all the parameters and significance of them are demonstrated in the table \ref{table: squared}.
+The model is fitted by R. And all the parameters and significance of them are demonstrated in the table below \ref{table: squared}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -967,7 +967,7 @@ Table 2.4: \emph{Estimation and Significance of Squared Model}
 \label{table: squared}
 \end{center}
 
-But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical variables. The parameters and their significance of selected model are shown in the table \ref{table: reduced_squared}.
+But there are still some useless covariates in the model. To simplify the model, a backward step-wise selection was used to the square of numerical variables. The parameters and their significance of selected model are shown in the table below \ref{table: reduced_squared}.
 
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -1019,7 +1019,7 @@ $$
 \log \frac{p}{1-p} = \beta_0 + \sum_{i=1}^{11} \beta_i x_i + \sum_{i \in \mathcal{N}}
 \beta_{i2}x_i ^2 + \sum_{i \in \mathcal{N}}\sum_{j \in \mathcal{N}}\beta_{ij}x_i x_j
 $$
-where $\mathcal N = \{1, 4, 7, 10\}$, which means the set of numerical variables. We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table \ref{table: reduced_interaction} 
+where $\mathcal N = \{1, 4, 7, 10\}$, which means the set of numerical variables. We also did backward stepwise selection to reduce the model, ane got all the coefficients demonstrated in the table below \ref{table: reduced_interaction} 
 
 \begin{center}
 \title{}
