@@ -1,4 +1,4 @@
-# The Generalized Linear Models course project
+# The Generalized Linear Models' course project
 
 Generalized Linear Models (GLMs) are the extension of the ordinary linear regression models. GLMs enable us to use different distributions for the response with distinctive link functions. 
 
